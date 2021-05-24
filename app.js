@@ -12,13 +12,16 @@ app.use('port', process.env.PORT || 3000);
 app.set('view engine', 'pug');
 app.set('views, views');
 
-router = express.Router();
+let routes = express.Router();
 
-router.get('/', function(req, res, next) {
+routes.get('/', function(req, res, next) {
     //Do whatever...
 });
 
-app.use('/', router);
+app.use('/', routes);
+
+app.use(app.router);
+routes.initialize(app);
 
 let errorHandler = expressErrorHandler({
     static: {
@@ -32,3 +35,5 @@ app.use(errorHandler);
 http.createServer(app).listen(app.get('port'), ()=>{
     console.log('서버 시작, 포트넘버: %d', app.get('port'));
 })
+
+module.export = routes;
