@@ -8,20 +8,19 @@ const static = require('serve-static');
 
 const expressErrorHandler = require('express-error-handler');
 
-app.use('port', process.env.PORT || 3000);
+//app.use('port', process.env.PORT || 3000);
 app.set('view engine', 'pug');
 app.set('views, views');
 
-let routes = express.Router();
+app.use('/public', static(path.join(__dirname, 'public')));
 
-routes.get('/', function(req, res, next) {
+router = express.Router();
+
+router.get('/', function(req, res, next) {
     //Do whatever...
 });
 
-app.use('/', routes);
-
-app.use(app.router);
-routes.initialize(app);
+app.use('/', router);
 
 /*let errorHandler = expressErrorHandler({
     static: {
@@ -33,7 +32,5 @@ routes.initialize(app);
 app.use(errorHandler);*/
 
 http.createServer(app).listen(app.get('port'), ()=>{
-    console.log('서버 시작, 포트넘버: %d', app.get('port'));
+    console.log('서버 시작, 포트넘버: %d', 3000/*app.get('port')*/);
 })
-
-module.export = routes;
