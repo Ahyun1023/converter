@@ -14,6 +14,9 @@ app.set('views, views');
 
 app.use('/public', static(path.join(__dirname, 'public')));
 
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
 router = express.Router();
 
 router.get('/', function(req, res, next) {
