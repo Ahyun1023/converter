@@ -1,3 +1,13 @@
+*{
+    background-color: #587792;
+}
+
 .convertDiv{
     text-align: center;
+}
+
+.converTextarea{
+    resize: none;
+    border-width: 3px;
+    border-color: #9CBA7F;
 }
