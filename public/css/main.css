@@ -1,4 +1,4 @@
-*{
+body{
     background-color: #587792;
 }
 
@@ -15,4 +15,13 @@
     border-width: 3px;
     border-color: #9CBA7F;
     background-color:#CDE397;
+}
+
+.submitButton{
+    width: 50%;
+    height: 50px;
+    background-color: #9CBA7F;
+    color: white;
+    font-size: large;
+    font-weight: bold;
 }
