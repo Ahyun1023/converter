@@ -7,7 +7,7 @@ body{
     text-align: center;
 }
 
-.convertDiv{
+.convertDiv, .resultDiv{
     text-align: center;
 }
 
@@ -21,6 +21,14 @@ body{
 
 .converTextarea:focus{
     outline: none;
+}
+
+.resultTextarea{
+    resize: none;
+    border-width: 3px;
+    width: 500px;
+    border-color: #9CBA7F;
+    background-color:#CDE397;
 }
 
 .submitButton{
