@@ -17,6 +17,7 @@ body{
     width: 500px;
     border-color: #9CBA7F;
     background-color:#CDE397;
+    font-size: large;
 }
 
 .converTextarea:focus{
