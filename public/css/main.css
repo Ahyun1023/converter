@@ -9,6 +9,13 @@ body{
 
 .convertDiv{
     text-align: center;
+    padding: 0px;
+    margin: 0px auto;
+    border: 1px solid black;
+}
+
+.beforeConvert{
+    display: inline-block;
 }
 
 .converTextarea{
