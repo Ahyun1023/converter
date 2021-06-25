@@ -49,3 +49,16 @@ body{
     background-color: #7b9463;
     cursor: pointer;
 }
+
+.optionDiv input[type=radio], label{
+    cursor: pointer;
+}
+
+.optionDiv label{
+    color: white;
+    font-weight: bold;
+}
+
+.optionDiv label:hover{
+    color: black;
+}
