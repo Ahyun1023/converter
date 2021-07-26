@@ -8,7 +8,7 @@ const static = require('serve-static');
 
 const expressErrorHandler = require('express-error-handler');
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8090);
 app.set('view engine', 'pug');
 app.set('views, views');
 
@@ -38,4 +38,4 @@ http.createServer(app).listen(app.get('port'), ()=>{
     console.log('서버 시작, 포트넘버: %d', app.get('port'));
 })
 
-//url : http://localhost:3000/public/
+//url : http://localhost:8090/public/
