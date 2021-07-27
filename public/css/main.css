@@ -1,3 +1,8 @@
-/*body{
-    
-}*/
+body{
+    background: linear-gradient(gray 10%, white 90% );
+}
+
+.title{
+    text-align: center;
+    padding-top: 10%;
+}
