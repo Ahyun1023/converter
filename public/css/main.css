@@ -1,8 +1,23 @@
 body{
-    background: linear-gradient(gray 10%, white 90% );
+    background: linear-gradient(#e3e3e3 10%, white 90% ) fixed;
 }
 
 .title{
     text-align: center;
-    padding-top: 10%;
+    padding-top: 5%;
+    font-size: 100px;
+    animation-duration:1s;
+    animation-name: fadeUp;
+}
+
+@keyframes fadeUp{
+	from {
+		margin-top:150px;
+		opacity: 0;
+  }
+
+  to {
+    padding-top: 5%;
+    opacity: 1;
+  }
 }
