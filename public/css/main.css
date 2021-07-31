@@ -25,7 +25,7 @@ body{
 
 .title{
     text-align: center;
-    padding-top: 5%;
+    padding-top: 3%;
     font-size: 80px;
     animation-duration:1s;
     animation-name: fadeUp;
@@ -33,6 +33,10 @@ body{
 
 .choice_1{
     border : 1px solid black;
+    width: 50px;
+    margin: 5%;
+    padding: 10%;
+    
 }
 
 @keyframes fadeUp{
@@ -42,7 +46,7 @@ body{
   }
 
   to {
-    padding-top: 5%;
+    padding-top: 3%;
     opacity: 1;
   }
 }
