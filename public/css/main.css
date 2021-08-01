@@ -32,10 +32,12 @@ body{
 }
 
 .choice_1{
-    border : 1px solid black;
+    border : 1px solid #d6d6d6;
     width: 50px;
     margin: 5%;
     padding: 10%;
+    background: white;
+    border-radius: 3%;
     
 }
 
