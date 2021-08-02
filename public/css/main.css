@@ -38,7 +38,10 @@ body{
     padding: 10%;
     background: white;
     border-radius: 3%;
-    
+}
+
+.choice_1:hover{
+    transform:scale(1.1);
 }
 
 @keyframes fadeUp{
