@@ -31,7 +31,7 @@ body{
     animation-name: fadeUp;
 }
 
-.choice_1{
+.choice_1, .choice_2, .choice_3{
     border : 1px solid #d6d6d6;
     width: 50px;
     margin: 5%;
@@ -39,9 +39,11 @@ body{
     background: white;
     border-radius: 3%;
     transition: .5s;
+    cursor: pointer;
+    float: left;
 }
 
-.choice_1:hover{
+.choice_1:hover, .choice_2:hover, .choice_3:hover{
     transform: scale(1.1);
     transition: .5s;
 }
