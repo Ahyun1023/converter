@@ -23,9 +23,13 @@ body{
 .top { top: 0; }
 .bottom { bottom: 0; }
 
+.topDiv{
+    margin-top: 2%;
+    margin-left: 95%;
+}
+
 .title{
     text-align: center;
-    padding-top: 3%;
     font-size: 80px;
     animation-duration:1s;
     animation-name: fadeUp;
@@ -50,12 +54,11 @@ body{
 
 @keyframes fadeUp{
 	from {
-		margin-top:150px;
+		margin-top:100px;
 		opacity: 0;
   }
 
   to {
-    padding-top: 3%;
     opacity: 1;
   }
 }
