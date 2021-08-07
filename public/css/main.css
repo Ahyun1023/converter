@@ -28,6 +28,11 @@ body{
     margin-left: 95%;
 }
 
+.login{
+    text-decoration: none;
+    color: black;
+}
+
 .title{
     text-align: center;
     font-size: 80px;
