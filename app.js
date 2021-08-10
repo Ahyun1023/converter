@@ -19,8 +19,9 @@ app.use(express.json());
 
 router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/input.do', function(req, res, next) {
     //Do whatever...
+    console.log(req);
 });
 
 app.use('/', router);
