@@ -4,9 +4,9 @@ function convert(){
 }
 
 function choice1Click(){
-    $(".mainDiv").load("/input.do");
+   //$(".mainDiv").load("/input.do");
 
-    $(".mainDiv").load("/input.do", {"ex" : "data"}, function(){
+    $(".mainDiv").load("input.html", {"ex" : "data"}, function(){
         alert("success");
     });
 }

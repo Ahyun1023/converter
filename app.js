@@ -10,7 +10,7 @@ const expressErrorHandler = require('express-error-handler');
 
 app.set('port', process.env.PORT || 8090);
 app.set('view engine', 'pug');
-app.set('views, views');
+//app.set('views, views');
 
 app.use('/public', static(path.join(__dirname, 'public')));
 
@@ -20,8 +20,7 @@ app.use(express.json());
 router = express.Router();
 
 router.get('/input.do', function(req, res, next) {
-    //Do whatever...
-    console.log(req);
+    res.render('input');
 });
 
 app.use('/', router);
