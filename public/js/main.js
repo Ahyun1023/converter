@@ -4,7 +4,7 @@ function convert(){
 }
 
 function choice1Click(){
-    $(".mainDiv").load("input.html", {"ex" : "data"}, function(){
-        alert("success");
+    $(".mainDiv").load("input.html", function(){
+        
     });
 }
