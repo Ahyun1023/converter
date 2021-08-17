@@ -2,16 +2,11 @@ body{
     background-color: #587792;
 }
 
-.title{
-    color: #F4E04E;
-    text-align: center;
-}
-
 .convertDiv{
     text-align: center;
+    margin-top: 5%;
     padding: 0px;
     margin: 0px auto;
-    border: 1px solid black;
 }
 
 .beforeConvert{
@@ -55,7 +50,6 @@ body{
 }
 
 .optionDiv label{
-    color: white;
     font-weight: bold;
 }
 
