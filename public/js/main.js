@@ -1,10 +1,11 @@
-function convert(){
-    let beforeText = document.getElementById('beforeText').value;
-    
-}
+let opacity = 0;
+let intervalID = 0;
+	 
 
 function choice1Click(){
-    $(".mainDiv").load("input.html", function(){
-        
-    });
+    $('.mainDiv').fadeOut('slow', function(){
+        $(".mainDiv").load("input.html", function(){
+            $(".mainDiv").fadeIn('slow');
+        });
+    });    
 }
