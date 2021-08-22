@@ -42,7 +42,6 @@ body{
 
 .submitButton:hover{
     background-color: #7b9463;
-    cursor: pointer;
 }
 
 .optionDiv input[type=radio], label{
