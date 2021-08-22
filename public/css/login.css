@@ -1,6 +1,17 @@
 .loginDiv{
     border: 1px solid black;
+    border-radius: 5px;
     padding: 10%;
-    margin: 10%;
+    margin: 12%;
+    
     text-align: center;
+}
+
+.loginDiv input{
+    width: 20%;
+}
+
+.btnDiv button{
+    width: 15%;
+    cursor: pointer;
 }
