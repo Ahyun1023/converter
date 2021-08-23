@@ -1,10 +1,10 @@
 .loginDiv{
-    border: 1px solid black;
     border-radius: 5px;
-    padding: 10%;
-    margin: 12%;
-    
+    padding: 15%;
+    margin: 3%;
+    background-color: white;
     text-align: center;
+    box-shadow: 3px 3px 10px;
 }
 
 .loginDiv input{
@@ -14,4 +14,8 @@
 .btnDiv button{
     width: 15%;
     cursor: pointer;
+}
+
+.loginDiv input, button{
+    height: 30px;
 }
