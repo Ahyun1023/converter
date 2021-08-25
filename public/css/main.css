@@ -1,8 +1,9 @@
 body{
-    background: linear-gradient(#e8e8e8 10%, white 90% ) fixed;
+    /*background: linear-gradient(#e8e8e8 10%, white 90% ) fixed;*/
+    background-color: #D5EEBB;
 }
 
-.top, .bottom, .left, .right {
+/*.top, .bottom, .left, .right {
 	background: #afff75;
 	position: fixed;
 }
@@ -21,7 +22,7 @@ body{
 }
 
 .top { top: 0; }
-.bottom { bottom: 0; }
+.bottom { bottom: 0; }*/
 
 .topDiv{
     margin-top: 2%;
