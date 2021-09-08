@@ -23,6 +23,8 @@ router.get('/input.do', function(req, res, next) {
     res.render('input');
 });
 
+router.get('login')
+
 app.use('/', router);
 
 /*let errorHandler = expressErrorHandler({
