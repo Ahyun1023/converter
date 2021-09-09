@@ -8,6 +8,8 @@ const static = require('serve-static');
 
 const expressErrorHandler = require('express-error-handler');
 
+const common_routes = require('./routes/common_route');
+
 app.set('port', process.env.PORT || 8090);
 app.set('view engine', 'pug');
 //app.set('views, views');
@@ -19,11 +21,7 @@ app.use(express.json());
 
 router = express.Router();
 
-router.get('/input.do', function(req, res, next) {
-    res.render('input');
-});
-
-router.get('login')
+router.route('/doLogin').post(common_routes.doLogin);
 
 app.use('/', router);
 
