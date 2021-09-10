@@ -7,8 +7,10 @@ function loginButtonClick(){
 }
 
 function doLogin(){
-    let id = document.getElementById("id").value;
-    let pw = doucment.getElementById("pw").value;
+    let login_data = {
+        id: document.getElementById("id").value,
+        pw: doucment.getElementById("pw").value
+    }
 
-    
+    login_data = JSON.stringify(login_data);
 }
