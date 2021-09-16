@@ -2,7 +2,22 @@ const mysql_dbc = require('../DB/db')();
 const connection = mysql_dbc.init();
 
 const doLogin = (req, res)=>{
-    res.send({result: true});
+    let loginInfo = req.body.data;
+
+    loginInfo = JSON.parse(users);
+    loginInfo.password = crypto.createHash('sha256').update(loginInfo.password).digest('hex');
+    
+    connection.query('SELECT * FROM user WHERE id = ? AND password = ?;', [loginInfo.id, loginInfo.password], (err, results)=>{
+        if(err){
+            console.log(err);
+        } else{
+            if(results == 0){
+                res.send({result: false});
+            } else{
+                res.send({result: true});
+            }
+        }
+    });
 };
 
 module.exports.doLogin = doLogin;
