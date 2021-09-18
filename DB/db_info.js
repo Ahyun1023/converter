@@ -7,7 +7,7 @@ module.exports = (()=> {
             port: 3306,
             user: global.db_userId,
             password: global.db_password,
-            database: 'toymarket'
+            database: 'converter'
         },
 
         real: { //실 서버용
