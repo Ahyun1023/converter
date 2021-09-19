@@ -8,7 +8,7 @@ const static = require('serve-static');
 
 const expressErrorHandler = require('express-error-handler');
 
-const common_routes = require('./routes/common_route');
+const user_rountes = require('./routes/user_route');
 
 app.set('port', process.env.PORT || 8090);
 app.set('view engine', 'pug');
@@ -21,7 +21,7 @@ app.use(express.json());
 
 router = express.Router();
 
-router.route('/doLogin').post(common_routes.doLogin);
+router.route('/doLogin').post(user_rountes.doLogin);
 
 app.use('/', router);
 
