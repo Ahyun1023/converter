@@ -12,22 +12,30 @@
 <body>
     <div class="convertDiv">
         <div class="beforeConvert">
-            <textarea class="converTextarea" id="beforeText" cols="30" rows="10"></textarea>
-        </div>
-        <div>
-            <input type="button" class="submitButton" value="변형" onclick="convert()">
+            <div>변환 전</div>
+            <textarea id="beforeConverTextarea" id="beforeText" cols="50" rows="10"></textarea>
         </div>
         <div class="afterConvertDiv">
-            <textarea class="converTextarea" id="afterText" cols="30" rows="10"></textarea>
+            <div>변환 후</div>
+            <textarea id="afterConverTextarea" id="afterText" cols="50" rows="10"></textarea>
         </div>
-        <div class="optionDiv">
+        <!--<div class="submitDiv">
+            <input type="button" class="submitButton" value="변형" onclick="convert()">
+        </div>-->
+
+        <div class="buttonsDiv">
+            <input type="button" class="resetButton" value="초기화" onclick="convertReset()" onkeydown="convertChange()">
+        </div>
+
+        <!--<div class="optionDiv">
             <input type="radio" name="type" id="enBig" value="enBig"><label for="enBig">대문자로 변형</label>
             <input type="radio" name="type" id="enSmall" value="enSmall"><label for="enSmall">소문자로 변형</label>
         </div>
         <div class="convertKindDiv">
             <input type="button" id="convertUniCode" value="유니코드 변환">
             <input type="button" id="converUnixTime" value="유닉스 시간 변환">
-        </div>
+        </div>-->
+
         <!--향후 변환 추가-->
     </div>
 </body>
