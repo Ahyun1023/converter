@@ -6,36 +6,42 @@
     <link rel="stylesheet" href="/public/css/input.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/public/js/common.js" type="text/javascript"></script>
-    <script src="/public/js/input.js" type="text/javascript"></script>
     <title>CONVERTER</title>
 </head>
 <body>
+    <div class="optionDiv">
+        <form name="TypeForm" onclick="typeChange()">
+            <input type="radio" name="convertType" id="camel" value="camel" checked="checked"><label for="camel">카멜 표기법</label>
+            <input type="radio" name="convertType" id="snake" value="snake"><label for="snake">스네이크 표기법</label>
+            <input type="radio" name="convertType" id="pascal" value="pascal"><label for="pascal">파스칼 표기법</label>
+            <input type="radio" name="convertType" id="kebab" value="kebab"><label for="kebab">케밥 표기법</label>
+        </form>
+    </div>
+
     <div class="convertDiv">
+        <div id="divTitle">카멜 표기법</div>
+        <div id="divContent">띄어쓰기, 언더바를 변환합니다. (ex: camel_var -> camelVar)</div>
         <div class="beforeConvert">
             <div>변환 전</div>
-            <textarea id="beforeConverTextarea" id="beforeText" cols="50" rows="10"></textarea>
+            <textarea id="beforeConverTextarea" id="beforeText" cols="50" rows="10" onkeyup="convertChange(this.value)"></textarea>
         </div>
         <div class="afterConvertDiv">
             <div>변환 후</div>
             <textarea id="afterConverTextarea" id="afterText" cols="50" rows="10"></textarea>
         </div>
-        <!--<div class="submitDiv">
-            <input type="button" class="submitButton" value="변형" onclick="convert()">
-        </div>-->
-
         <div class="buttonsDiv">
-            <input type="button" class="resetButton" value="초기화" onclick="convertReset()" onkeydown="convertChange()">
+            <form name="TypeForm" class="TypeForm" id="TypeForm" onclick="typeChange()">
+                <input type="radio" name="caseType" id="enBig" value="enBig" checked="checked"><label for="enBig">대문자로 표기</label>
+                <input type="radio" name="caseType" id="enSmall" value="enSmall"><label for="enSmall">소문자로 표기</label>
+            </form>
+            <input type="button" class="resetButton" value="초기화" onclick="convertReset()">
         </div>
-
-        <!--<div class="optionDiv">
-            <input type="radio" name="type" id="enBig" value="enBig"><label for="enBig">대문자로 변형</label>
-            <input type="radio" name="type" id="enSmall" value="enSmall"><label for="enSmall">소문자로 변형</label>
-        </div>
-        <div class="convertKindDiv">
-            <input type="button" id="convertUniCode" value="유니코드 변환">
-            <input type="button" id="converUnixTime" value="유닉스 시간 변환">
-        </div>-->
-
-        <!--향후 변환 추가-->
     </div>
+
+    <!--<div class="convertKindDiv">
+        <input type="button" id="convertUniCode" value="유니코드 변환">
+        <input type="button" id="converUnixTime" value="유닉스 시간 변환">
+    </div>-->
+    
+    <!--향후 변환 추가-->
 </body>

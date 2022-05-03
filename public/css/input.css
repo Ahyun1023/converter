@@ -2,50 +2,9 @@ body{
     /*background-color: #587792;*/
 }
 
-.convertDiv{
+.optionDiv{ 
+    margin: 2rem;
     text-align: center;
-    margin-top: 5%;
-    padding: 0px;
-    margin: 0px auto;
-}
-
-.beforeConvert, .afterConvertDiv{
-    display: inline-block;
-    margin: 10px;
-    margin-top: 100px;
-}
-
-.beforeConvert div, .afterConvertDiv div{
-    margin: 10px;
-}
-
-#beforeConverTextarea, #afterConverTextarea{
-    resize: none;
-    border-width: 2px;
-    width: 600px;
-    height: 300px;
-    /*border-color: #9CBA7F;
-    background-color:#CDE397;*/
-    font-size: large;
-}
-
-#converTextarea:focus, #afterConverTextarea:focus{
-    outline: none;
-}
-
-.submitButton{
-    width: 300px;
-    height: 50px;
-    background-color: gray;
-    color: white;
-    font-size: large;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.submitButton:hover{
-    background-color: #7b9463;
 }
 
 .optionDiv input[type=radio], label{
@@ -58,4 +17,51 @@ body{
 
 .optionDiv label:hover{
     color: black;
+}
+
+.convertDiv{
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0rem;
+    margin: 0rem auto;
+}
+
+#divTitle{ 
+    margin-top: 3rem;
+}
+
+.beforeConvert, .afterConvertDiv{
+    display: inline-block;
+    margin: 1rem;
+    margin-top: 1rem;
+}
+
+.beforeConvert div, .afterConvertDiv div{
+    margin: 1rem;
+}
+
+#beforeConverTextarea, #afterConverTextarea{
+    resize: none;
+    border-width: 2px;
+    width: 40rem;
+    height: 20rem;
+    /*border-color: #9CBA7F;
+    background-color:#CDE397;*/
+    font-size: large;
+}
+
+#beforeConverTextarea{
+    background-color: #edffe0;
+}
+
+#afterConverTextarea{
+    background-color: #e0ffee;
+}
+
+#converTextarea:focus, #afterConverTextarea:focus{
+    outline: none;
+}
+
+.TypeForm{ 
+    display: none;
 }
