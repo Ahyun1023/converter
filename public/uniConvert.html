@@ -1,0 +1,35 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/common.css">
+    <!--<link rel="stylesheet" href="/public/css/convert/caseConvert.css">-->
+    <link rel="stylesheet" href="/public/css/convert/uniConvert.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/public/js/common.js" type="text/javascript"></script>
+    <!--<script src="/public/js/convert/caseConvert.js" type="text/javascript"></script>-->
+    <script src="/public/js/convert/uniConvert.js" type="text/javascript"></script>
+    <title>CONVERTER</title>
+</head>
+<body>
+    <div class="optionDiv">
+        <form name="TypeForm" onclick="typeChange()">
+            <input type="radio" name="convertType" id="uniCode" value="uniCode" checked="checked"><label for="uniCode">유니코드 변환</label>
+            <input type="radio" name="convertType" id="unixTime" value="unixTime"><label for="unixTime">유닉스 시간 변환</label>
+        </form>
+    </div>
+
+    <div class="convertDiv">
+        <div class="beforeConvert">
+            <div id="beforeTitle">한글 입력란</div>
+            <textarea id="beforeConverTextarea" id="beforeText" cols="50" rows="10" onkeyup="convertChange(this.value)"></textarea>
+        </div>
+        <div class="afterConvertDiv">
+            <div id="afterTitle">유니코드</div>
+            <textarea id="afterConverTextarea" id="afterText" cols="50" rows="10"></textarea>
+        </div>
+        <div class="buttonsDiv">
+            <input type="button" class="resetButton" value="초기화" onclick="convertReset()">
+        </div>
+    </div>
+</body>
