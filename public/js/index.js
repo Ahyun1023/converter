@@ -7,5 +7,13 @@ function caseConvert(){
         $(".mainDiv").load("caseConvert.html", function(){
             $(".mainDiv").fadeIn('slow');
         });
-    });    
+    });
+}
+
+function uniConvert(){
+    $('.mainDiv').fadeOut('slow', function(){
+        $(".mainDiv").load("uniConvert.html", function(){
+            $(".mainDiv").fadeIn('slow');
+        });
+    });
 }
