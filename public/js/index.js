@@ -2,9 +2,9 @@ let opacity = 0;
 let intervalID = 0;
 	 
 
-function choice1Click(){
+function caseConvert(){
     $('.mainDiv').fadeOut('slow', function(){
-        $(".mainDiv").load("input.html", function(){
+        $(".mainDiv").load("caseConvert.html", function(){
             $(".mainDiv").fadeIn('slow');
         });
     });    
