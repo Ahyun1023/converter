@@ -26,8 +26,8 @@ body{
     margin: 0rem auto;
 }
 
-#divTitle{ 
-    margin-top: 3rem;
+#normalTimeDiv{
+    display: none;
 }
 
 .beforeConvert, .afterConvertDiv{
@@ -62,6 +62,7 @@ body{
     outline: none;
 }
 
-.TypeForm{ 
+#convertButtonDiv{ 
+    margin: 1rem;
     display: none;
 }
