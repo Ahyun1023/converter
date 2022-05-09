@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="optionDiv">
-        <form name="TypeForm" onclick="typeChange()">
+        <form name="convertForm" onclick="typeChange()">
             <input type="radio" name="convertType" id="unicode" value="unicode" checked="checked"><label for="unicode">유니코드 변환</label>
             <input type="radio" name="convertType" id="unixTime" value="unixTime"><label for="unixTime">유닉스 시간 변환</label>
         </form>
@@ -20,17 +20,17 @@
     <div class="convertDiv">
         <div id='beforeConvert'class="beforeConvert">
             <div id="beforeTitle">한글 입력란</div>
-            <textarea id="beforeConverTextarea" cols="50" rows="10" onkeyup="convertChange(this.value)"></textarea>
+            <textarea id="beforeConverTextarea" cols="50" rows="10" onkeyup="convert(this.value)"></textarea>
         </div>
         <div id="normalTimeDiv">
             <div id="beforeTitle">날짜</div>
-            <form action="">
-                <input type="text" id="normal_year" placeholder="year" type="number">
-                <input type="text" id="normal_month" placeholder="month" type="number">
-                <input type="text" id="normal_day" placeholder="day" type="number">
-                <input type="text" id="normal_hour" placeholder="hour" type="number">
-                <input type="text" id="normal_minutes" placeholder="minutes" type="number">
-                <input type="text" id="normal_seconds" placeholder="seconds" type="number">
+            <form class="beforeTimeForm">
+                <input type="text" id="normalYear" placeholder="year" type="number">
+                <input type="text" id="normalMonth" placeholder="month" type="number">
+                <input type="text" id="normalDay" placeholder="day" type="number">
+                <input type="text" id="normalHour" placeholder="hour" type="number">
+                <input type="text" id="normalMinutes" placeholder="minutes" type="number">
+                <input type="text" id="normalSeconds" placeholder="seconds" type="number">
             </form>
         </div>
         
@@ -43,6 +43,10 @@
                 <input type="button" id="convertButton" class="convertButton" value="현재시간 변환" onclick="convertUnixTime(true)">
                 <input type="button" id="convertButton" class="convertButton" value="변환" onclick="convertUnixTime(false)">
             </div>
+            <form name="typeForm" class="typeForm" id="typeForm" onclick="typeChange()">
+                <input type="radio" name="caseType" id="normalChange" value="normalChange" checked="checked"><label for="normalChange">일반시간 -> 유닉스시간</label>
+                <input type="radio" name="caseType" id="unixChange" value="unixChange"><label for="unixChange">유닉스시간 -> 일반시간</label>
+            </form>
             <div>
                 <input type="button" class="resetButton" value="초기화" onclick="convertReset()">
             </div>

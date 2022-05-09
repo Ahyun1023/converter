@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="optionDiv">
-        <form name="TypeForm" onclick="typeChange()">
+        <form name="convertForm" onclick="typeChange()">
             <input type="radio" name="convertType" id="camel" value="camel" checked="checked"><label for="camel">카멜 표기법</label>
             <input type="radio" name="convertType" id="snake" value="snake"><label for="snake">스네이크 표기법</label>
             <input type="radio" name="convertType" id="pascal" value="pascal"><label for="pascal">파스칼 표기법</label>
@@ -24,14 +24,14 @@
         <div id="divContent">띄어쓰기, 언더바를 변환합니다. (ex: camel_var -> camelVar)</div>
         <div class="beforeConvert">
             <div>변환 전</div>
-            <textarea id="beforeConverTextarea" id="beforeText" cols="50" rows="10" onkeyup="convertChange(this.value)"></textarea>
+            <textarea id="beforeConverTextarea" id="beforeText" cols="50" rows="10" onkeyup="convert(this.value)"></textarea>
         </div>
         <div class="afterConvertDiv">
             <div>변환 후</div>
             <textarea id="afterConverTextarea" id="afterText" cols="50" rows="10"></textarea>
         </div>
         <div class="buttonsDiv">
-            <form name="TypeForm" class="TypeForm" id="TypeForm" onclick="typeChange()">
+            <form name="typeForm" class="typeForm" id="typeForm" onclick="typeChange()">
                 <input type="radio" name="caseType" id="enBig" value="enBig" checked="checked"><label for="enBig">대문자로 표기</label>
                 <input type="radio" name="caseType" id="enSmall" value="enSmall"><label for="enSmall">소문자로 표기</label>
             </form>

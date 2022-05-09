@@ -3,7 +3,7 @@ function convertReset(){
     document.getElementById('afterConverTextarea').value = '';
 }
 
-function convertChange(enter){
+function convert(enter){
     let convertType = document.querySelector('input[name="convertType"]:checked').value;
 
     if(convertType == 'camel' || convertType == 'pascal'){
@@ -33,12 +33,12 @@ function typeChange(){
     }
 
     if(convertType == 'snake'){
-        document.getElementById('TypeForm').style.display = 'block';
+        document.getElementById('typeForm').style.display = 'block';
     } else {
-        document.getElementById('TypeForm').style.display = 'none';
+        document.getElementById('typeForm').style.display = 'none';
     }
 
-    convertChange(document.getElementById('beforeConverTextarea').value);
+    convert(document.getElementById('beforeConverTextarea').value);
 }
 
 function camelOrPascalChange(enter, convertType){

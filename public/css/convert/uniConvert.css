@@ -30,6 +30,10 @@ body{
     display: none;
 }
 
+.beforeTimeForm{
+    text-align: center;
+}
+
 .beforeConvert, .afterConvertDiv{
     display: inline-block;
     margin: 1rem;
@@ -63,6 +67,11 @@ body{
 }
 
 #convertButtonDiv{ 
+    margin: 1rem;
+    display: none;
+}
+
+.typeForm{ 
     margin: 1rem;
     display: none;
 }

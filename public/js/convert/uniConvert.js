@@ -1,40 +1,63 @@
 function typeChange(){
     let convertType = document.querySelector('input[name="convertType"]:checked').value;
 
+    document.getElementById('beforeConverTextarea').value = '';
+    document.getElementById('afterConverTextarea').value = '';
+
     if(convertType == 'unicode'){
         document.getElementById('beforeTitle').innerHTML = '한글입력 란';
         document.getElementById('afterTitle').innerHTML = '유니코드';
         document.getElementById('beforeConvert').style.display = 'inline-block';
         document.getElementById('normalTimeDiv').style.display = 'none';
         document.getElementById('convertButtonDiv').style.display = 'none';
+        document.getElementById('typeForm').style.display = 'none';
     } else if(convertType == 'unixTime'){
-        document.getElementById('beforeTitle').innerHTML = '일반 시간';
-        document.getElementById('afterTitle').innerHTML = '유닉스 시간';
-        document.getElementById('convertButtonDiv').style.display = 'block';
-        document.getElementById('normalTimeDiv').style.display = 'inline-block';
-        document.getElementById('beforeConvert').style.display = 'none';
-        document.getElementById('afterConverTextarea').readOnly = true;
+        document.getElementById('typeForm').style.display = 'block';
+
+        let formType = document.querySelector('input[name="caseType"]:checked').value;
+
+        if(formType == 'normalChange'){
+            document.getElementById('beforeTitle').innerHTML = '일반 시간';
+            document.getElementById('afterTitle').innerHTML = '유닉스 시간';
+            document.getElementById('convertButtonDiv').style.display = 'block';
+            document.getElementById('normalTimeDiv').style.display = 'inline-block';
+            document.getElementById('beforeConvert').style.display = 'none';
+            document.getElementById('afterConverTextarea').readOnly = true;
+        } else {
+            document.getElementById('beforeTitle').innerHTML = '유닉스 시간';
+            document.getElementById('afterTitle').innerHTML = '일반 시간';
+            document.getElementById('convertButtonDiv').style.display = 'block';
+            document.getElementById('normalTimeDiv').style.display = 'none';
+            document.getElementById('beforeConvert').style.display = 'inline-block';
+            document.getElementById('afterConverTextarea').readOnly = true;
+        }
     }
 }
 
 function convertReset(){
+    let convertType = document.querySelector('input[name="convertType"]:checked').value;
+    let formType = document.querySelector('input[name="caseType"]:checked').value;
+
     document.getElementById('beforeConverTextarea').value = '';
     document.getElementById('afterConverTextarea').value = '';
+
+    if(convertType == 'unixTime'){
+        if(formType = 'unixChange'){
+            document.getElementById('beforeTimeForm').reset();
+        }
+    }
     
 }
 
-function convertChange(enter){
+function convert(enter){
     let convertType = document.querySelector('input[name="convertType"]:checked').value;
 
     if(convertType == 'unicode'){
         convertUnicode(enter);
-    } /*else if(convertType == 'unixTime') {
-        convertUnixTime(enter);
-    }*/
+    }
 }
 
 function convertUnicode(enter){
-    //let enter = document.getElementById('beforeText').value;
     let english = /[a-zA-Z]/;
     let number = /[0-9]/;
     let special =  /[~!@#\#$%<>^&*]/;
@@ -56,21 +79,37 @@ function convertUnicode(enter){
 }
 
 function convertUnixTime(isNowTime){
-    if(isNowTime){
-        document.getElementById('afterConverTextarea').value = Math.floor(new Date().getTime() / 1000);
+    let formType = document.querySelector('input[name="caseType"]:checked').value;
+    
+    if(formType == 'normalChange'){
+        if(isNowTime){
+            document.getElementById('afterConverTextarea').value = Math.floor(new Date().getTime() / 1000);
+        } else {
+            let year = document.getElementById('normalYear').value;
+            let month = document.getElementById('normalMonth').value;
+            let day = document.getElementById('normalDay').value;
+            let hour = document.getElementById('normalHour').value;
+            let minutes = document.getElementById('normalMinutes').value;
+            let seconds = document.getElementById('normalSeconds').value;
+            
+            let date = new Date(year + "-" + month + "-" + day + ", " + hour + ":" + minutes  + ":" + seconds);
+            let enter = Math.floor(date.getTime() / 1000);
+            
+            document.getElementById('afterConverTextarea').value = enter;
+        }
     } else {
-        let year = document.getElementById('normal_year').value;
-        let month = document.getElementById('normal_month').value;
-        let day = document.getElementById('normal_day').value;
-        let hour = document.getElementById('normal_hour').value;
-        let minutes = document.getElementById('normal_minutes').value;
-        let seconds = document.getElementById('normal_seconds').value;
+        let nowUnixTime = Math.floor(new Date().getTime() / 1000);
+        document.getElementById('beforeConverTextarea').value = nowUnixTime;
+        
+        nowUnixTime = new Date(nowUnixTime*1000);
 
-        let enter = Math.floor()
+        let year = nowUnixTime.getFullYear();
+        let month = nowUnixTime.getMonth() + 1;
+        let day = nowUnixTime.getDate();
+        let hour = nowUnixTime.getHours();
+        let minutes = nowUnixTime.getMinutes();
+        let seconds = nowUnixTime.getSeconds();
 
-        /* 변환 */
-        //let enter = year + '-' + month.substr(-2) + '-' + day.substr(-2) + ' ' + hour.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-        document.getElementById('afterConverTextarea').value = enter;
+        document.getElementById('afterConverTextarea').value = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
     }
 }
-

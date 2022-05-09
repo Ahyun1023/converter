@@ -62,6 +62,7 @@ body{
     outline: none;
 }
 
-.TypeForm{ 
+.typeForm{ 
+    margin: 1rem;
     display: none;
 }
