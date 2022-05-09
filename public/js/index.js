@@ -17,3 +17,11 @@ function uniConvert(){
         });
     });
 }
+
+function queryConvert(){
+    $('.mainDiv').fadeOut('slow', function(){
+        $(".mainDiv").load("queryConvert.html", function(){
+            $(".mainDiv").fadeIn('slow');
+        });
+    });
+}
