@@ -1,7 +1,3 @@
-body{
-    /*background-color: #587792;*/
-}
-
 .optionDiv{ 
     margin: 2rem;
     text-align: center;
@@ -45,8 +41,6 @@ body{
     border-width: 2px;
     width: 40rem;
     height: 20rem;
-    /*border-color: #9CBA7F;
-    background-color:#CDE397;*/
     font-size: large;
 }
 
