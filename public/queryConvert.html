@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/common.css">
-    <link rel="stylesheet" href="/public/css/convert/uniConvert.css">
+    <link rel="stylesheet" href="/public/css/convert/queryConvert.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/public/js/common.js" type="text/javascript"></script>
     <script src="/public/js/convert/queryConvert.js" type="text/javascript"></script>
@@ -18,18 +18,24 @@
             <input type="radio" name="convertType" id="delete" value="delete"><label for="delete">DELETE</label>
         </form>
     </div>
-
     <div class="convertDiv">
-        <div id='beforeConvert'class="beforeConvert">
-            <div id="beforeTitle">컬럼명 작성 란</div>
-            <form action="columnsForm">
-                <input type="text">
-                <input type="text">
+        <div id="beforeConvertDiv" class="beforeConvertDiv">
+            <div id="beforeTitle">
+                <span>컬럼명 작성 란</span>
+                <input type="button" id="addButton" name="addButton" value="추가" onclick="addColumn()">
+                <input type="button" id="deleteButton" name="deleteButton" value="삭제" onclick="deleteColumn()">
+            </div>
+            <form id="columnsForm" name="columnsForm">
+                <div id="columnDiv" name="columnDiv">
+                    <input type="checkbox" name="isKeyColumns">
+                    <input type="text" name="columns">
+                </div>
             </form>
         </div>
-        <input type="button" value="추가">
-        <input type="button" value="삭제">
-
+        <div id="" class="">
+            <label><input type="checkbox" name="whereCheckbox" id="whereCheckbox" onclick="whereCheck()">WHERE 여부</label>
+            
+        </div>
         <div class="afterConvertDiv">
             <div id="afterTitle">결과</div>
             <textarea id="afterConverTextarea" cols="50" rows="10"></textarea>
@@ -40,6 +46,12 @@
                     <option value="mysql">mysql</option>
                     <option value="postgresql">postgresql</option>
                     <option value="oracle">oracle</option>
+                </select>
+            </div>
+            <div id="queryTypeDiv">
+                <select name="queryType" id="queryType">
+                    <option value="node.js">node.js</option>
+                    <option value="mybatis">mybatis</option>
                 </select>
             </div>
             <div>

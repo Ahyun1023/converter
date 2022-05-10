@@ -1,0 +1,75 @@
+.optionDiv{ 
+    margin: 2rem;
+    text-align: center;
+}
+
+.optionDiv input[type=radio], label{
+    cursor: pointer;
+}
+
+.optionDiv label{
+    font-weight: bold;
+}
+
+.optionDiv label:hover{
+    color: black;
+}
+
+.convertDiv{
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0rem;
+    margin: 0rem auto;
+}
+
+#normalTimeDiv{
+    display: none;
+}
+
+.beforeTimeForm{
+    text-align: center;
+}
+
+.beforeConvertDiv, .afterConvertDiv{
+    display: inline-block;
+    margin: 1rem;
+    margin-top: 1rem;
+}
+
+.beforeConvertDiv div, .afterConvertDiv div{
+    margin: 1rem;
+}
+
+#beforeConverTextarea, #afterConverTextarea{
+    resize: none;
+    border-width: 2px;
+    width: 40rem;
+    height: 20rem;
+    font-size: large;
+}
+
+#beforeConverTextarea{
+    background-color: #edffe0;
+}
+
+#afterConverTextarea{
+    background-color: #e0ffee;
+}
+
+#converTextarea:focus, #afterConverTextarea:focus{
+    outline: none;
+}
+
+#convertButtonDiv{ 
+    margin: 1rem;
+    display: none;
+}
+
+.typeForm{ 
+    margin: 1rem;
+    display: none;
+}
+
+/*#columnsForm{
+    border: 1px solid black;
+}*/
