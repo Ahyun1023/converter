@@ -17,7 +17,7 @@ function convertReset(){
     document.getElementById('columnsForm').reset();
 }
 
-function convert(){
+function convert(isLineBreak){
     let convertType = document.querySelector('input[name="convertType"]:checked').value;
     let output = '';
     let columnsArr = [];
@@ -27,13 +27,13 @@ function convert(){
     }
 
     if(convertType == 'select'){
-        output = selectConvert(columnsArr);
+        output = selectConvert(columnsArr, isLineBreak);
     } else if(convertType == 'insert'){
-        output = insertConvert(columnsArr);
+        output = insertConvert(columnsArr, isLineBreak);
     } else if(convertType == 'update'){
-        output = updateConvert(columnsArr);
+        output = updateConvert(columnsArr, isLineBreak);
     } else if(convertType == 'delete'){
-        output = deleteConvert(columnsArr);
+        output = deleteConvert(columnsArr, isLineBreak);
     }
 
     document.getElementById('afterConverTextarea').value = output;
@@ -73,30 +73,92 @@ function whereAllCheck(){
     }
 }
 
-function selectConvert(columnsArr){
+function selectConvert(columnsArr, isLineBreak){
     let output = 'SELECT ';
 
     for(var i = 0; i < columnsArr.length; i++){
-        output += columnsArr[i] + ', '
+        if(i != columnsArr.length - 1){
+            if(isLineBreak == true){
+                output += '\t' + columnsArr[i] + ', ' + '\n'
+            } else {
+                output += columnsArr[i] + ', '
+            }
+            
+        } else {
+            if(isLineBreak == true){
+                output += '\t' + columnsArr[i] + '\n'
+            } else {
+                output += columnsArr[i]
+            }
+        }
     }
+    
+    if(isLineBreak){
+        output += 'FROM' + '\t' + '[table_name]';
+    } else {
+        output += ' FROM ' + '[table_name] ';
+    }
+    
 
     //WHERE은 선택사항
     if(document.getElementById('whereCheckbox').checked){
-        output += " WHERE ";
+        let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
+        let termCheckArr = [];
 
-        if(document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value == 'node.js'){
-            
+        for(var i = 0; i < columnsArr.length; i++){
+            if(document.getElementsByName('columnDiv')[i].firstChild.checked == true){
+                termCheckArr.push(columnsArr[i]);
+            }
+        }
+
+        if(termCheckArr.length  <= 0){
+            alert('where절의 조건에 들어갈 컬럼이 선택되지 않았습니다.');
+            return '';
+        }
+        
+        if(isLineBreak){
+            output += '\n' + 'WHERE';
         } else {
-            
+            output += 'WHERE ';
+        }
+
+        for(var i = 0; i < termCheckArr.length; i++){
+            if(dbmsType == 'node.js'){
+                if(i != termCheckArr.length - 1){
+                    if(isLineBreak){
+                        output += '\t' + termCheckArr[i] + ' = ? ' + '\n' + 'AND '
+                    } else {
+                        output += termCheckArr[i] + ' = ? ' + 'AND '
+                    }
+                } else {
+                    if(isLineBreak){
+                        output += '\t' + termCheckArr[i] + ' = ?;'
+                    } else {
+                        output += termCheckArr[i] + ' = ?;'
+                    }
+                }
+            } else if(dbmsType == 'mybatis') {
+                if(i != termCheckArr.length - 1){
+                    if(isLineBreak){
+                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}' + '\n' + 'AND '
+                    } else {
+                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} ' + 'AND '
+                    }
+                } else {
+                    if(isLineBreak){
+                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
+                    } else {
+                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
+                    }
+                }
+            }
         }
     }
-
-    return ouput;
-    /* 조인? 일단 생각만 해놓겠삼 */
+    return output;
 }
 
-function insertConvert(columnsArr){
-    let output = 'INSERT INTO' + document.getElementById('tables').value + ' (';
+function insertConvert(columnsArr, isLineBreak){
+    let output = 'INSERT INTO ' + '[table_name]' + ' (';
 
     for(var i = 0; i < columnsArr.length; i++){
         output += columnsArr[i] + ', '
@@ -111,20 +173,20 @@ function insertConvert(columnsArr){
     return output;
 }
 
-function updateConvert(columnsArr){
+function updateConvert(columnsArr, isLineBreak){
     let output = 'UPDATE';
 
     //WHERE은 선택사항
 
-    return ouput;
+    return output;
 }
 
-function deleteConvert(columnsArr){
+function deleteConvert(columnsArr, isLineBreak){
     let output = 'DELETE';
 
     //WHERE은 선택사항
 
-    return ouput;
+    return output;
 }
 
 function addColumn(){
