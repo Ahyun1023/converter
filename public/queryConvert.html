@@ -27,14 +27,13 @@
             </div>
             <form id="columnsForm" name="columnsForm">
                 <div id="columnDiv" name="columnDiv">
-                    <input type="checkbox" name="isKeyColumns">
                     <input type="text" name="columns">
                 </div>
             </form>
         </div>
-        <div id="" class="">
-            <label><input type="checkbox" name="whereCheckbox" id="whereCheckbox" onclick="whereCheck()">WHERE 여부</label>
-            
+        <div id="whereOptionDiv" class="whereOptionDiv">
+            <label id="whereCheckLabel"><input type="checkbox" name="whereCheckbox" id="whereCheckbox" onclick="whereCheck()">WHERE 여부</label>
+            <label id="whereAllCheckLabel"><input type="checkbox" name="whereAllCheckbox" id="whereAllCheckbox" onclick="whereAllCheck()">전체선택</label>
         </div>
         <div class="afterConvertDiv">
             <div id="afterTitle">결과</div>

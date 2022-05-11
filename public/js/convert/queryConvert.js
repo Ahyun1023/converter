@@ -1,5 +1,15 @@
 function typeChange(){
+    let convertType = document.querySelector('input[name="convertType"]:checked').value;
 
+    if(convertType == 'select'){
+        document.getElementById('whereOptionDiv').style.display = 'block';
+    } else if(convertType == 'insert'){
+        document.getElementById('whereOptionDiv').style.display = 'none';
+    } else if(convertType == 'update'){
+        document.getElementById('whereOptionDiv').style.display = 'block';
+    } else if(convertType == 'delete'){
+        document.getElementById('whereOptionDiv').style.display = 'block';
+    }
 }
 
 function convertReset(){
@@ -31,19 +41,35 @@ function convert(){
 
 function whereCheck(){
     if(document.getElementById('whereCheckbox').checked){
-        let addCheckbox = document.createElement('input');
-            addCheckbox.setAttribute('type', 'checkbox');
-            addCheckbox.setAttribute('name', 'isKeyColumns');
+        document.getElementById('whereAllCheckLabel').style.display = 'block';
+    } else {
+        document.getElementById('whereAllCheckLabel').style.display = 'none';
+    }
 
-        for(var i = 0; i < document.getElementById('columnsForm').childElementCount; i++){
-            //let parentparent = document.getElementById('columnsForm');
-            let parent = document.getElementsByName('columnDiv')[i];
-            console.log(parent);
+    for(var i = 0; i < document.getElementById('columnsForm').childElementCount; i++){
+        let parent = document.getElementsByName('columnDiv')[i];
+
+        if(document.getElementById('whereCheckbox').checked){
+            let addCheckbox = document.createElement('input');
+            addCheckbox.setAttribute('type', 'checkbox');
+            addCheckbox.setAttribute('name', 'isTermColumns');
             
             parent.insertBefore(addCheckbox, parent.firstChild);
+        } else {
+            parent.removeChild(parent.firstChild);
         }
-    } else {
-        
+    }
+}
+
+function whereAllCheck(){
+    for(var i = 0; i < document.getElementById('columnsForm').childElementCount; i++){
+        let thisCheckbox = document.getElementsByName('columnDiv')[i];
+
+        if(document.getElementById('whereAllCheckbox').checked){
+            thisCheckbox.firstChild.checked = true;
+        } else {
+            thisCheckbox.firstChild.checked = false;
+        }
     }
 }
 
@@ -54,7 +80,7 @@ function selectConvert(columnsArr){
         output += columnsArr[i] + ', '
     }
 
-    //WHERE은 선택사항 (선택시 써놓은 컬럼 옆에 WHERE절에 넣을 키값?들을 선택하는 체크박스가 생겨야할듯)
+    //WHERE은 선택사항
     if(document.getElementById('whereCheckbox').checked){
         output += " WHERE ";
 
@@ -102,6 +128,11 @@ function deleteConvert(columnsArr){
 }
 
 function addColumn(){
+    if(document.getElementById('columnsForm').childElementCount > 29){
+        alert('컬럼은 최대 30개까지만 설정할 수 있습니다.');
+        return;
+    }
+
     let newDiv = document.createElement('div');
     newDiv.setAttribute('id', 'columnDiv');
     newDiv.setAttribute('name', 'columnDiv');
@@ -110,7 +141,7 @@ function addColumn(){
     if(document.getElementById('whereCheckbox').checked){
         let addCheckbox = document.createElement('input');
         addCheckbox.setAttribute('type', 'checkbox');
-        addCheckbox.setAttribute('name', 'isKeyColumns');
+        addCheckbox.setAttribute('name', 'isTermColumns');
 
         newDiv.appendChild(addCheckbox);
     }

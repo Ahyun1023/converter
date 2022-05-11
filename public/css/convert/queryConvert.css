@@ -70,6 +70,6 @@
     display: none;
 }
 
-/*#columnsForm{
-    border: 1px solid black;
-}*/
+#whereAllCheckLabel{
+    display: none;
+}
