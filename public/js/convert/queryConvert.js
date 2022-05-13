@@ -10,6 +10,10 @@ function typeChange(){
     } else if(convertType == 'delete'){
         document.getElementById('whereOptionDiv').style.display = 'block';
     }
+
+    convertReset();
+    document.getElementById('whereCheckbox').checked = false;
+    document.getElementById('whereAllCheckLabel').style.display = 'none';
 }
 
 function convertReset(){
@@ -44,6 +48,7 @@ function whereCheck(){
         document.getElementById('whereAllCheckLabel').style.display = 'block';
     } else {
         document.getElementById('whereAllCheckLabel').style.display = 'none';
+        document.getElementById('whereAllCheckbox').checked = false;
     }
 
     for(var i = 0; i < document.getElementById('columnsForm').childElementCount; i++){
@@ -158,23 +163,58 @@ function selectConvert(columnsArr, isLineBreak){
 }
 
 function insertConvert(columnsArr, isLineBreak){
+    let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'INSERT INTO ' + '[table_name]' + ' (';
 
     for(var i = 0; i < columnsArr.length; i++){
-        output += columnsArr[i] + ', '
+        if(i != columnsArr.length - 1){
+            output += columnsArr[i] + ', '
+        } else {
+            output += columnsArr[i]
+        }
     }
 
-    output += ') VALUES (';
+    if(dbmsType == 'node.js'){
+        output += ') VALUES ?;';
+    } else if(dbmsType == 'mybatis'){
+        output += ') VALUES (';
 
-    for(var i = 0; i < columnsArr.length; i++){
-        output += columnsArr[i] + ', '
+        for(var i = 0; i < columnsArr.length; i++){
+            if(i != columnsArr.length - 1){
+                output += columnsArr[i] + ', '
+            } else {
+                output += columnsArr[i]
+            }
+        }
+
+        output += ');';
     }
-
+    
     return output;
 }
 
 function updateConvert(columnsArr, isLineBreak){
+    let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'UPDATE';
+
+    if(isLineBreak) {
+        output += '\n' + '\t' + '[table_name]' + '\n' + 'SET' + '\n';
+    } else {
+        output += ' [table_name]' + ' SET ';
+    }
+
+    if(dbmsType == 'node.js'){
+        for(var i = 0; i < columnsArr.length; i++){
+            if(i != columnsArr.length - 1){
+                output += columnsArr[i] + ', '
+            } else {
+                output += columnsArr[i]
+            }
+        }
+    } else if(dbmsType == 'mybatis'){
+
+    }
+
 
     //WHERE은 선택사항
 
@@ -182,6 +222,7 @@ function updateConvert(columnsArr, isLineBreak){
 }
 
 function deleteConvert(columnsArr, isLineBreak){
+    let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'DELETE';
 
     //WHERE은 선택사항
