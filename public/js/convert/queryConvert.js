@@ -116,57 +116,7 @@ function selectConvert(columnsArr, isLineBreak){
 
     //WHERE은 선택사항
     if(document.getElementById('whereCheckbox').checked){
-        let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
-        let termCheckArr = [];
-
-        for(var i = 0; i < columnsArr.length; i++){
-            if(document.getElementsByName('columnDiv')[i].firstChild.checked == true){
-                termCheckArr.push(columnsArr[i]);
-            }
-        }
-
-        if(termCheckArr.length  <= 0){
-            alert('where절의 조건에 들어갈 컬럼이 선택되지 않았습니다.');
-            return '';
-        }
-        
-        if(isLineBreak){
-            output += '\n' + 'WHERE';
-        } else {
-            output += 'WHERE ';
-        }
-
-        for(var i = 0; i < termCheckArr.length; i++){
-            if(dbmsType == 'node.js'){
-                if(i != termCheckArr.length - 1){
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = ? ' + '\n' + 'AND '
-                    } else {
-                        output += termCheckArr[i] + ' = ? ' + 'AND '
-                    }
-                } else {
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = ?;'
-                    } else {
-                        output += termCheckArr[i] + ' = ?;'
-                    }
-                }
-            } else if(dbmsType == 'mybatis') {
-                if(i != termCheckArr.length - 1){
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}' + '\n' + 'AND '
-                    } else {
-                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} ' + 'AND '
-                    }
-                } else {
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
-                    } else {
-                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
-                    }
-                }
-            }
-        }
+        output = makeWhereQuery(output, columnsArr, isLineBreak);
     }
     return output;
 }
@@ -215,7 +165,7 @@ function updateConvert(columnsArr, isLineBreak){
     if(dbmsType == 'node.js'){
         for(var i = 0; i < columnsArr.length; i++){
             if(i != columnsArr.length - 1){
-                output += '\t' + columnsArr[i] + ', ' + '\n'
+                output += '\t' + columnsArr[i] + ', ' + '\n' //뒤에 = [받아올 데이터] 추가 필요
             } else {
                 output += '\t' + columnsArr[i]
             }
@@ -225,60 +175,10 @@ function updateConvert(columnsArr, isLineBreak){
     }
 
     //WHERE은 선택사항
-    output = makeWhereQuery(output, columnsArr, isLineBreak);
-    /*if(document.getElementById('whereCheckbox').checked){
-        let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
-        let termCheckArr = [];
+    if(document.getElementById('whereCheckbox').checked){
+        output = makeWhereQuery(output, columnsArr, isLineBreak);
+    }
 
-        for(var i = 0; i < columnsArr.length; i++){
-            if(document.getElementsByName('columnDiv')[i].firstChild.checked == true){
-                termCheckArr.push(columnsArr[i]);
-            }
-        }
-
-        if(termCheckArr.length  <= 0){
-            alert('where절의 조건에 들어갈 컬럼이 선택되지 않았습니다.');
-            return '';
-        }
-        
-        if(isLineBreak){
-            output += '\n' + 'WHERE';
-        } else {
-            output += 'WHERE ';
-        }
-
-        for(var i = 0; i < termCheckArr.length; i++){
-            if(dbmsType == 'node.js'){
-                if(i != termCheckArr.length - 1){
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = ? ' + '\n' + 'AND '
-                    } else {
-                        output += termCheckArr[i] + ' = ? ' + 'AND '
-                    }
-                } else {
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = ?;'
-                    } else {
-                        output += termCheckArr[i] + ' = ?;'
-                    }
-                }
-            } else if(dbmsType == 'mybatis') {
-                if(i != termCheckArr.length - 1){
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}' + '\n' + 'AND '
-                    } else {
-                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} ' + 'AND '
-                    }
-                } else {
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
-                    } else {
-                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
-                    }
-                }
-            }
-        }
-    }*/
     return output;
 }
 
@@ -286,68 +186,66 @@ function deleteConvert(columnsArr, isLineBreak){
     let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'DELETE FROM ';
 
-    if(isLineBreak) {
-        output += '[table_name]' + '\n';
-    } else {
-        output += ' [table_name]';
-    }
+    //테이블명
+    output += '[table_name] ';
 
     //WHERE은 선택사항
-    output = makeWhereQuery(output, columnsArr, isLineBreak);
+    if(document.getElementById('whereCheckbox').checked){
+        output = makeWhereQuery(output, columnsArr, isLineBreak);
+    }
+
     return output;
 }
 
 function makeWhereQuery(output, columnsArr, isLineBreak){
-    if(document.getElementById('whereCheckbox').checked){
-        let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
-        let termCheckArr = [];
+    let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
+    let termCheckArr = [];
 
-        for(var i = 0; i < columnsArr.length; i++){
-            if(document.getElementsByName('columnDiv')[i].firstChild.checked == true){
-                termCheckArr.push(columnsArr[i]);
-            }
+    for(var i = 0; i < columnsArr.length; i++){
+        if(document.getElementsByName('columnDiv')[i].firstChild.checked == true){
+            termCheckArr.push(columnsArr[i]);
         }
+    }
 
-        if(termCheckArr.length  <= 0){
-            alert('where절의 조건에 들어갈 컬럼이 선택되지 않았습니다.');
-            return '';
-        }
+    if(termCheckArr.length  <= 0){
+        alert('where절의 조건에 들어갈 컬럼이 선택되지 않았습니다.');
+        return '';
+    }
         
-        if(document.getElementsByClassName('convertType').value == 'delete' || !isLineBreak){
-            output += 'WHERE ';
-        } else {
-            output += '\n' + 'WHERE';
-        }
+    if(document.getElementsByClassName('convertType').value == 'delete' || !isLineBreak){
+        output += 'WHERE ';
+    } else {
+        output += '\n' + 'WHERE';
+    }
         
 
-        for(var i = 0; i < termCheckArr.length; i++){
-            if(dbmsType == 'node.js'){
-                if(i != termCheckArr.length - 1){
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = ? ' + '\n' + 'AND '
-                    } else {
-                        output += termCheckArr[i] + ' = ? ' + 'AND '
-                    }
+    for(var i = 0; i < termCheckArr.length; i++){
+        if(dbmsType == 'node.js'){
+            if(i != termCheckArr.length - 1){
+                if(isLineBreak){
+                    output += '\t' + termCheckArr[i] + ' = ? ' + '\n' + 'AND '
                 } else {
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = ?;'
-                    } else {
-                        output += termCheckArr[i] + ' = ?;'
-                    }
+                    output += termCheckArr[i] + ' = ? ' + 'AND '
                 }
-            } else if(dbmsType == 'mybatis') {
-                if(i != termCheckArr.length - 1){
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}' + '\n' + 'AND '
-                    } else {
-                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} ' + 'AND '
-                    }
+            } else {
+                if(isLineBreak){
+                    output += '\t' + termCheckArr[i] + ' = ?;'
                 } else {
-                    if(isLineBreak){
-                        output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
-                    } else {
-                        output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
-                    }
+                    output += termCheckArr[i] + ' = ?;'
+                }
+            }
+        } else if(dbmsType == 'mybatis') {
+            if(i != termCheckArr.length - 1){
+                if(isLineBreak){
+                    output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}' + '\n' + 'AND '
+                } else {
+                    output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} ' + 'AND '
+                }
+            } else {
+                if(isLineBreak){
+                    output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
+                } else {
+                    output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
                 }
             }
         }
