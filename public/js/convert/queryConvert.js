@@ -33,7 +33,9 @@ function convert(isLineBreak){
     let columnsArr = [];
 
     for(var i = 0; i < document.getElementById('columnsForm').childElementCount; i++){
-        columnsArr.push(document.getElementsByName('columns')[i].value);
+        if(document.getElementsByName('columns')[i].value.length > 0){
+            columnsArr.push(document.getElementsByName('columns')[i].value);
+        }
     }
 
     if(convertType == 'select'){
@@ -223,7 +225,7 @@ function makeWhereQuery(output, columnsArr, isLineBreak){
         }
     }
 
-    if(termCheckArr.length  <= 0){
+    if(termCheckArr.length <= 0){
         alert('where절의 조건에 들어갈 컬럼이 선택되지 않았습니다.');
         return '';
     }
