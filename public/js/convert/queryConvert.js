@@ -25,9 +25,6 @@ function convertReset(){
     }
     document.getElementById('whereAllCheckbox').checked = false;
     document.getElementById('afterConverTextarea').value = '';
-    document.getElementById('columnsForm').reset();
-    
-    
 }
 
 function convert(isLineBreak){
@@ -52,6 +49,7 @@ function convert(isLineBreak){
     document.getElementById('afterConverTextarea').value = output;
 }
 
+/* where 여부 체크 이벤트 */
 function whereCheck(){
     if(document.getElementById('whereCheckbox').checked){
         document.getElementById('whereAllCheckLabel').style.display = 'block';
@@ -75,6 +73,7 @@ function whereCheck(){
     }
 }
 
+/* where 전체 선택 */
 function whereAllCheck(){
     for(var i = 0; i < document.getElementById('columnsForm').childElementCount; i++){
         let thisCheckbox = document.getElementsByName('columnDiv')[i];
@@ -87,6 +86,7 @@ function whereAllCheck(){
     }
 }
 
+/* select 쿼리 생성 함수 */
 function selectConvert(columnsArr, isLineBreak){
     let output = 'SELECT ';
 
@@ -118,9 +118,12 @@ function selectConvert(columnsArr, isLineBreak){
     if(document.getElementById('whereCheckbox').checked){
         output = makeWhereQuery(output, columnsArr, isLineBreak);
     }
+
+    output += ';';
     return output;
 }
 
+/* insert 쿼리 생성 함수 */
 function insertConvert(columnsArr, isLineBreak){
     let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'INSERT INTO ' + '[table_name]' + ' (';
@@ -134,7 +137,7 @@ function insertConvert(columnsArr, isLineBreak){
     }
 
     if(dbmsType == 'node.js'){
-        output += ') VALUES ?;';
+        output += ') VALUES ?';
     } else if(dbmsType == 'mybatis'){
         output += ') VALUES (';
 
@@ -146,12 +149,14 @@ function insertConvert(columnsArr, isLineBreak){
             }
         }
 
-        output += ');';
+        output += ')';
     }
-    
+
+    output += ';';
     return output;
 }
 
+/* update 쿼리 생성 함수 */
 function updateConvert(columnsArr, isLineBreak){
     let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'UPDATE';
@@ -165,9 +170,17 @@ function updateConvert(columnsArr, isLineBreak){
     if(dbmsType == 'node.js'){
         for(var i = 0; i < columnsArr.length; i++){
             if(i != columnsArr.length - 1){
-                output += '\t' + columnsArr[i] + ', ' + '\n' //뒤에 = [받아올 데이터] 추가 필요
+                if(isLineBreak == true){
+                    output += '\t' + columnsArr[i] + ', ' + '\n' //뒤에 = [받아올 데이터] 추가 필요
+                } else {
+                    output += columnsArr[i] + ', ' //뒤에 = [받아올 데이터] 추가 필요
+                }
             } else {
-                output += '\t' + columnsArr[i]
+                if(isLineBreak == true){
+                    output += '\t' + columnsArr[i]
+                } else {
+                    output += columnsArr[i] + ' '
+                }
             }
         }
     } else if(dbmsType == 'mybatis'){
@@ -179,11 +192,12 @@ function updateConvert(columnsArr, isLineBreak){
         output = makeWhereQuery(output, columnsArr, isLineBreak);
     }
 
+    output += ';';
     return output;
 }
 
+/* delete 쿼리 생성 함수 */
 function deleteConvert(columnsArr, isLineBreak){
-    let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'DELETE FROM ';
 
     //테이블명
@@ -194,9 +208,11 @@ function deleteConvert(columnsArr, isLineBreak){
         output = makeWhereQuery(output, columnsArr, isLineBreak);
     }
 
+    output += ';';
     return output;
 }
 
+/* where절 만드는 함수 */
 function makeWhereQuery(output, columnsArr, isLineBreak){
     let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let termCheckArr = [];
@@ -229,9 +245,9 @@ function makeWhereQuery(output, columnsArr, isLineBreak){
                 }
             } else {
                 if(isLineBreak){
-                    output += '\t' + termCheckArr[i] + ' = ?;'
+                    output += '\t' + termCheckArr[i] + ' = ?'
                 } else {
-                    output += termCheckArr[i] + ' = ?;'
+                    output += termCheckArr[i] + ' = ?'
                 }
             }
         } else if(dbmsType == 'mybatis') {
@@ -254,6 +270,7 @@ function makeWhereQuery(output, columnsArr, isLineBreak){
     return output;
 }
 
+/* 컬럼 추가 */
 function addColumn(){
     if(document.getElementById('columnsForm').childElementCount > 29){
         alert('컬럼은 최대 30개까지만 설정할 수 있습니다.');
@@ -264,7 +281,7 @@ function addColumn(){
     newDiv.setAttribute('id', 'columnDiv');
     newDiv.setAttribute('name', 'columnDiv');
 
-    /* where절 여부 체크박스가 checked 상태일 때 컬럼 옆에 키값여부 체크박스를 생성한다 */
+    // where절 여부 체크박스가 checked 상태일 때 컬럼 옆에 키값여부 체크박스를 생성한다
     if(document.getElementById('whereCheckbox').checked){
         let addCheckbox = document.createElement('input');
         addCheckbox.setAttribute('type', 'checkbox');
@@ -282,6 +299,7 @@ function addColumn(){
     document.getElementById('columnsForm').appendChild(newDiv);
 }
 
+/* 컬럼 삭제 */
 function deleteColumn(){
     if(document.getElementById('columnsForm').childElementCount > 1){
         let removeColumn = document.getElementById('columnsForm').lastChild;
