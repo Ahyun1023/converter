@@ -163,6 +163,29 @@ function updateConvert(columnsArr, isLineBreak){
     let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'UPDATE';
 
+    /* */
+
+    for(var i = 0; i < columnsArr.length; i++){
+        if(columnsArr[i].indexOf('_', 0) < 0){
+            continue;
+        } else {
+            var beforeText = columnsArr[i].substr(i - 1, 1);
+            var nowText = columnsArr[i].substr(i, 1);
+
+            if(nowText == '_' || nowText == ' '){
+                beforeUnderbar = true;
+                continue;
+            }
+
+            if(beforeUnderbar == true){
+                nowText = nowText.toUpperCase();
+                beforeUnderbar = false;
+            }
+            afterText += nowText;
+            }
+    }
+    /* */
+
     if(isLineBreak) {
         output += '\n' + '\t' + '[table_name]' + '\n' + 'SET';
     } else {
@@ -173,7 +196,7 @@ function updateConvert(columnsArr, isLineBreak){
         for(var i = 0; i < columnsArr.length; i++){
             if(i != columnsArr.length - 1){
                 if(isLineBreak == true){
-                    output += '\t' + columnsArr[i] + ', ' + '\n' //뒤에 = [받아올 데이터] 추가 필요
+                    output += '\t' + columnsArr[i] + '= '+ ', ' + '\n' //뒤에 = [받아올 데이터] 추가 필요
                 } else {
                     output += columnsArr[i] + ', ' //뒤에 = [받아올 데이터] 추가 필요
                 }
