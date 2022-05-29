@@ -189,21 +189,18 @@ function updateConvert(columnsArr, isLineBreak){
         let transColumnsArr = [];
 
         for(var i = 0; i < columnsArr.length; i++){
-            if(columnsArr[i].indexOf('_', 0) < 0 || columnsArr[i].indexOf(' ', 0) < 0){
-                transColumnsArr.push(columnsArr[i]);
-                continue;
-            } else {
+            if(columnsArr[i].indexOf('_', 0) >= 0 || columnsArr[i].indexOf(' ', 0) >= 0){
                 var beforeUnderbar = false;
                 var completeFactor = '';
-    
+
                 for(var j = 0; j < columnsArr[i].length; j++){
-                    var nowText = columnsArr[i].substr(i, 1);
-    
+                    var nowText = columnsArr[i].substr(j, 1);
+
                     if(nowText == '_' || nowText == ' '){
                         beforeUnderbar = true;
                         continue;
                     }
-    
+
                     if(beforeUnderbar == true){
                         completeFactor += nowText.toUpperCase();
                         beforeUnderbar = false;
@@ -211,9 +208,12 @@ function updateConvert(columnsArr, isLineBreak){
                         completeFactor += nowText;
                     }
                 }
-                
-                transColumnsArr.push(completeFactor);
-                }
+            
+            transColumnsArr.push(completeFactor);
+            } else {
+                transColumnsArr.push(columnsArr[i]);
+                continue;
+            }
         }
 
         for(var i = 0; i < columnsArr.length; i++){
