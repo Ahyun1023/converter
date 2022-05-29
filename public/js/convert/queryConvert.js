@@ -163,29 +163,6 @@ function updateConvert(columnsArr, isLineBreak){
     let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
     let output = 'UPDATE';
 
-    /* */
-
-    for(var i = 0; i < columnsArr.length; i++){
-        if(columnsArr[i].indexOf('_', 0) < 0){
-            continue;
-        } else {
-            var beforeText = columnsArr[i].substr(i - 1, 1);
-            var nowText = columnsArr[i].substr(i, 1);
-
-            if(nowText == '_' || nowText == ' '){
-                beforeUnderbar = true;
-                continue;
-            }
-
-            if(beforeUnderbar == true){
-                nowText = nowText.toUpperCase();
-                beforeUnderbar = false;
-            }
-            afterText += nowText;
-            }
-    }
-    /* */
-
     if(isLineBreak) {
         output += '\n' + '\t' + '[table_name]' + '\n' + 'SET';
     } else {
@@ -196,20 +173,64 @@ function updateConvert(columnsArr, isLineBreak){
         for(var i = 0; i < columnsArr.length; i++){
             if(i != columnsArr.length - 1){
                 if(isLineBreak == true){
-                    output += '\t' + columnsArr[i] + '= '+ ', ' + '\n' //뒤에 = [받아올 데이터] 추가 필요
+                    output += '\t' + columnsArr[i] + '= ?,' + '\n'
                 } else {
-                    output += columnsArr[i] + ', ' //뒤에 = [받아올 데이터] 추가 필요
+                    output += columnsArr[i] + '= ?, '
                 }
             } else {
                 if(isLineBreak == true){
-                    output += '\t' + columnsArr[i]
+                    output += '\t' + columnsArr[i] + '= ?'
                 } else {
-                    output += columnsArr[i] + ' '
+                    output += columnsArr[i] + '= ? '
                 }
             }
         }
-    } else if(dbmsType == 'mybatis'){
-        //mybatis는 나중에
+    } else if(dbmsType == 'mybatis'){ //mybatis는 나중에. #{} 붙여야됨
+        let transColumnsArr = [];
+
+        for(var i = 0; i < columnsArr.length; i++){
+            if(columnsArr[i].indexOf('_', 0) < 0 || columnsArr[i].indexOf(' ', 0) < 0){
+                transColumnsArr.push(columnsArr[i]);
+                continue;
+            } else {
+                var beforeUnderbar = false;
+                var completeFactor = '';
+    
+                for(var j = 0; j < columnsArr[i].length; j++){
+                    var nowText = columnsArr[i].substr(i, 1);
+    
+                    if(nowText == '_' || nowText == ' '){
+                        beforeUnderbar = true;
+                        continue;
+                    }
+    
+                    if(beforeUnderbar == true){
+                        completeFactor += nowText.toUpperCase();
+                        beforeUnderbar = false;
+                    } else {
+                        completeFactor += nowText;
+                    }
+                }
+                
+                transColumnsArr.push(completeFactor);
+                }
+        }
+
+        for(var i = 0; i < columnsArr.length; i++){
+            if(i != columnsArr.length - 1){
+                if(isLineBreak == true){
+                    output += '\t' + columnsArr[i] + '= #{'+ transColumnsArr[i] + '}, ' + '\n'
+                } else {
+                    output += columnsArr[i] + '= #{'+ transColumnsArr[i] + '}, '
+                }
+            } else {
+                if(isLineBreak == true){
+                    output += '\t' + columnsArr[i] + '= #{' + transColumnsArr[i] + '}'
+                } else {
+                    output += columnsArr[i] + '= #{' + transColumnsArr[i] + '} '
+                }
+            }
+        }
     }
 
     //WHERE은 선택사항
@@ -284,9 +305,9 @@ function makeWhereQuery(output, columnsArr, isLineBreak){
                 }
             } else {
                 if(isLineBreak){
-                    output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
+                    output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}'
                 } else {
-                    output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} '
+                    output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '}'
                 }
             }
         }
