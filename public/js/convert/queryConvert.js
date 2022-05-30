@@ -185,7 +185,7 @@ function updateConvert(columnsArr, isLineBreak){
                 }
             }
         }
-    } else if(dbmsType == 'mybatis'){ //mybatis는 나중에. #{} 붙여야됨
+    } else if(dbmsType == 'mybatis'){
         let transColumnsArr = [];
 
         for(var i = 0; i < columnsArr.length; i++){
@@ -297,17 +297,50 @@ function makeWhereQuery(output, columnsArr, isLineBreak){
                 }
             }
         } else if(dbmsType == 'mybatis') {
-            if(i != termCheckArr.length - 1){
-                if(isLineBreak){
-                    output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}' + '\n' + 'AND '
+            //?
+            let transColumnsArr = [];
+
+            for(var i = 0; i < termCheckArr.length; i++){
+                if(termCheckArr[i].indexOf('_', 0) >= 0 || termCheckArr[i].indexOf(' ', 0) >= 0){
+                    var beforeUnderbar = false;
+                    var completeFactor = '';
+
+                    for(var j = 0; j < termCheckArr[i].length; j++){
+                        var nowText = termCheckArr[i].substr(j, 1);
+
+                        if(nowText == '_' || nowText == ' '){
+                            beforeUnderbar = true;
+                            continue;
+                        }
+
+                        if(beforeUnderbar == true){
+                            completeFactor += nowText.toUpperCase();
+                            beforeUnderbar = false;
+                        } else {
+                            completeFactor += nowText;
+                        }
+                    }
+                
+                transColumnsArr.push(completeFactor);
                 } else {
-                    output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '} ' + 'AND '
+                    transColumnsArr.push(termCheckArr[i]);
+                    continue;
                 }
-            } else {
-                if(isLineBreak){
-                    output += '\t' + termCheckArr[i] + ' = #{' + termCheckArr[i] + '}'
+            }
+
+            for(var i = 0; i < termCheckArr.length; i++){
+                if(i != termCheckArr.length - 1){
+                    if(isLineBreak){
+                        output += '\t' + termCheckArr[i] + ' = #{' + transColumnsArr[i] + '}' + '\n' + 'AND '
+                    } else {
+                        output += termCheckArr[i] + ' = #{' + transColumnsArr[i] + '} ' + 'AND '
+                    }
                 } else {
-                    output += termCheckArr[i] + ' = #{' + termCheckArr[i] + '}'
+                    if(isLineBreak){
+                        output += '\t' + termCheckArr[i] + ' = #{' + transColumnsArr[i] + '}'
+                    } else {
+                        output += termCheckArr[i] + ' = #{' + transColumnsArr[i] + '}'
+                    }
                 }
             }
         }
