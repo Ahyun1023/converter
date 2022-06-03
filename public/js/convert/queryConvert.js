@@ -143,11 +143,14 @@ function insertConvert(columnsArr, isLineBreak){
     } else if(dbmsType == 'mybatis'){
         output += ') VALUES (';
 
-        for(var i = 0; i < columnsArr.length; i++){
-            if(i != columnsArr.length - 1){
-                output += '#{' + columnsArr[i] + '}, '
+        let transColumnsArr = [];
+        transColumnsArr = mybatisFactorColumn(columnsArr);
+
+        for(var i = 0; i < transColumnsArr.length; i++){
+            if(i != transColumnsArr.length - 1){
+                output += '#{' + transColumnsArr[i] + '}, '
             } else {
-                output += '#{' + columnsArr[i] + '}'
+                output += '#{' + transColumnsArr[i] + '}'
             }
         }
 
