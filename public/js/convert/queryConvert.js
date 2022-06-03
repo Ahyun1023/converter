@@ -145,9 +145,9 @@ function insertConvert(columnsArr, isLineBreak){
 
         for(var i = 0; i < columnsArr.length; i++){
             if(i != columnsArr.length - 1){
-                output += columnsArr[i] + ', '
+                output += '#{' + columnsArr[i] + '}, '
             } else {
-                output += columnsArr[i]
+                output += '#{' + columnsArr[i] + '}'
             }
         }
 
@@ -173,61 +173,34 @@ function updateConvert(columnsArr, isLineBreak){
         for(var i = 0; i < columnsArr.length; i++){
             if(i != columnsArr.length - 1){
                 if(isLineBreak == true){
-                    output += '\t' + columnsArr[i] + '= ?,' + '\n'
+                    output += '\t' + columnsArr[i] + ' = ?,' + '\n'
                 } else {
-                    output += columnsArr[i] + '= ?, '
+                    output += columnsArr[i] + ' = ?, '
                 }
             } else {
                 if(isLineBreak == true){
-                    output += '\t' + columnsArr[i] + '= ?'
+                    output += '\t' + columnsArr[i] + ' = ?'
                 } else {
-                    output += columnsArr[i] + '= ? '
+                    output += columnsArr[i] + ' = ? '
                 }
             }
         }
     } else if(dbmsType == 'mybatis'){
         let transColumnsArr = [];
-
-        for(var i = 0; i < columnsArr.length; i++){
-            if(columnsArr[i].indexOf('_', 0) >= 0 || columnsArr[i].indexOf(' ', 0) >= 0){
-                var beforeUnderbar = false;
-                var completeFactor = '';
-
-                for(var j = 0; j < columnsArr[i].length; j++){
-                    var nowText = columnsArr[i].substr(j, 1);
-
-                    if(nowText == '_' || nowText == ' '){
-                        beforeUnderbar = true;
-                        continue;
-                    }
-
-                    if(beforeUnderbar == true){
-                        completeFactor += nowText.toUpperCase();
-                        beforeUnderbar = false;
-                    } else {
-                        completeFactor += nowText;
-                    }
-                }
-            
-            transColumnsArr.push(completeFactor);
-            } else {
-                transColumnsArr.push(columnsArr[i]);
-                continue;
-            }
-        }
+        transColumnsArr = mybatisFactorColumn(columnsArr);
 
         for(var i = 0; i < columnsArr.length; i++){
             if(i != columnsArr.length - 1){
                 if(isLineBreak == true){
-                    output += '\t' + columnsArr[i] + '= #{'+ transColumnsArr[i] + '}, ' + '\n'
+                    output += '\t' + columnsArr[i] + ' = #{'+ transColumnsArr[i] + '},' + '\n'
                 } else {
-                    output += columnsArr[i] + '= #{'+ transColumnsArr[i] + '}, '
+                    output += columnsArr[i] + ' = #{'+ transColumnsArr[i] + '}, '
                 }
             } else {
                 if(isLineBreak == true){
-                    output += '\t' + columnsArr[i] + '= #{' + transColumnsArr[i] + '}'
+                    output += '\t' + columnsArr[i] + ' = #{' + transColumnsArr[i] + '}'
                 } else {
-                    output += columnsArr[i] + '= #{' + transColumnsArr[i] + '} '
+                    output += columnsArr[i] + ' = #{' + transColumnsArr[i] + '} '
                 }
             }
         }
@@ -297,36 +270,8 @@ function makeWhereQuery(output, columnsArr, isLineBreak){
                 }
             }
         } else if(dbmsType == 'mybatis') {
-            //?
             let transColumnsArr = [];
-
-            for(var i = 0; i < termCheckArr.length; i++){
-                if(termCheckArr[i].indexOf('_', 0) >= 0 || termCheckArr[i].indexOf(' ', 0) >= 0){
-                    var beforeUnderbar = false;
-                    var completeFactor = '';
-
-                    for(var j = 0; j < termCheckArr[i].length; j++){
-                        var nowText = termCheckArr[i].substr(j, 1);
-
-                        if(nowText == '_' || nowText == ' '){
-                            beforeUnderbar = true;
-                            continue;
-                        }
-
-                        if(beforeUnderbar == true){
-                            completeFactor += nowText.toUpperCase();
-                            beforeUnderbar = false;
-                        } else {
-                            completeFactor += nowText;
-                        }
-                    }
-                
-                transColumnsArr.push(completeFactor);
-                } else {
-                    transColumnsArr.push(termCheckArr[i]);
-                    continue;
-                }
-            }
+            transColumnsArr = mybatisFactorColumn(termCheckArr);
 
             for(var i = 0; i < termCheckArr.length; i++){
                 if(i != termCheckArr.length - 1){
@@ -347,6 +292,39 @@ function makeWhereQuery(output, columnsArr, isLineBreak){
     }
 
     return output;
+}
+
+function mybatisFactorColumn(columnsArr){
+    let transColumnsArr = [];
+
+    for(var i = 0; i < columnsArr.length; i++){
+            if(columnsArr[i].indexOf('_', 0) >= 0 || columnsArr[i].indexOf(' ', 0) >= 0){
+                var beforeUnderbar = false;
+                var completeFactor = '';
+
+                for(var j = 0; j < columnsArr[i].length; j++){
+                    var nowText = columnsArr[i].substr(j, 1);
+
+                    if(nowText == '_' || nowText == ' '){
+                        beforeUnderbar = true;
+                        continue;
+                    }
+
+                    if(beforeUnderbar == true){
+                        completeFactor += nowText.toUpperCase();
+                        beforeUnderbar = false;
+                    } else {
+                        completeFactor += nowText;
+                    }
+                }
+            
+            transColumnsArr.push(completeFactor);
+            } else {
+                transColumnsArr.push(columnsArr[i]);
+                continue;
+            }
+        }
+    return transColumnsArr;
 }
 
 /* 컬럼 추가 */
