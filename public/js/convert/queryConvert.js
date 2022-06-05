@@ -128,20 +128,39 @@ function selectConvert(columnsArr, isLineBreak){
 /* insert 쿼리 생성 함수 */
 function insertConvert(columnsArr, isLineBreak){
     let dbmsType = document.getElementById('queryType').options[document.getElementById('queryType').selectedIndex].value;
-    let output = 'INSERT INTO ' + '[table_name]' + ' (';
+    let output = 'INSERT INTO';
+
+    if(isLineBreak == true){
+        output += '[table_name]' | '\n' + ' (';
+    } else {
+        output += '[table_name]' + ' (';
+    }
 
     for(var i = 0; i < columnsArr.length; i++){
         if(i != columnsArr.length - 1){
-            output += columnsArr[i] + ', '
+            if(isLineBreak == true){
+                output += columnsArr[i] + ',' + '\n'
+            } else {
+                output += columnsArr[i] + ', '
+            }
         } else {
-            output += columnsArr[i]
+            output += columnsArr[i] + ')'
         }
     }
 
     if(dbmsType == 'node.js'){
-        output += ') VALUES ?';
+        if(isLineBreak == true){
+            output += ' VALUES ' + '\n' + '\t' + '?';
+        } else {
+            output += ' VALUES ?';
+        }
+    
     } else if(dbmsType == 'mybatis'){
-        output += ') VALUES (';
+        if(isLineBreak == true){
+            output += ' VALUES ' + '\n' + '\t'+ '(';
+        } else {
+            output += ' VALUES (';
+        }
 
         let transColumnsArr = [];
         transColumnsArr = mybatisFactorColumn(columnsArr);
