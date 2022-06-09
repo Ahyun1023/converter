@@ -12,6 +12,16 @@ function doLogin(){
         password: document.getElementById("password").value
     }
 
+    if(login_data.id.length <= 0){
+        alert('아이디를 입력해주세요.');
+        document.getElementById("id").focus();
+        return;
+    } else if(login_data.password.length <= 0){
+        alert('비밀번호를 입력해주세요.');
+        document.getElementById("password").focus();
+        return;
+    }
+
     login_data = JSON.stringify(login_data);
 
     $(document).ready(()=>{
