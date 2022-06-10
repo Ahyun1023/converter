@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
+const logger = require('./logging/log_info');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(errorHandler);*/
 
 http.createServer(app).listen(app.get('port'), ()=>{
     console.log('서버 시작, 포트넘버: %d', app.get('port'));
+    logger.info('서버 시작222, 포트넘버: %d');
 })
 
 //url : http://localhost:8090/public/

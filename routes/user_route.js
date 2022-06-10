@@ -1,5 +1,6 @@
 const mysql_dbc = require('../DB/db')();
 const connection = mysql_dbc.init();
+const logger = require('../logging/log_info');
 
 const crypto = require('crypto');
 
