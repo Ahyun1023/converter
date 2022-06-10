@@ -37,7 +37,8 @@ app.use(errorHandler);*/
 
 http.createServer(app).listen(app.get('port'), ()=>{
     console.log('서버 시작, 포트넘버: %d', app.get('port'));
-    logger.info('서버 시작222, 포트넘버: %d');
+    
+    logger.info('로그 출력 test');
 })
 
 //url : http://localhost:8090/public/

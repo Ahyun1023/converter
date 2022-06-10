@@ -1,64 +1,3 @@
-/*const winston = require('winston');
-const winstonDaily = require('winston-daily-rotate-file');
-const moment = require('moment');
-const logDir = '../logger';
-
-const levels = {
-    error: 0,
-    warn: 1,
-    info: 2,
-    http: 3,
-    debug: 4,
-}
-
-const level = () => {
-    const env = process.env.NODE_ENV || 'development'
-    const isDevelopment = env === 'development'
-    return isDevelopment ? 'debug' : 'warn'
-}
-
-const colors = {
-    error: 'red',
-    warn: 'yellow',
-    info: 'green',
-    http: 'magenta',
-    debug: 'blue',
-}
-
-winston.addColors(colors);
-
-function timeStampFormat(){
-    return moment().format('YYYY-MM-DD HH:mm:ss.SSS ZZ');
-};
-
-const logger = winston.createLogger({
-
-    timeStampFormat,
-    level: level(),
-    transports: [
-        new winston.transports.DailyRotateFile({
-            level: 'info',
-            datePattern: 'YYYY-MM-DD',
-            dirname: logDir,
-            filename: `%DATE%.log`,
-            zippedArchive: true,	
-            handleExceptions: true,
-            maxFiles: 30,
-        }),
-        new winston.transports.DailyRotateFile({
-            level: 'error',
-            datePattern: 'YYYY-MM-DD',
-            dirname: logDir + '/error',  
-            filename: `%DATE%.error.log`,
-            zippedArchive: true,
-            maxFiles: 30,
-        }),
-        new winston.transports.Console({
-            handleExceptions: true,
-        })
-    ]
-});*/
-
 const winston = require('winston');
 require('winston-daily-rotate-file');
 const logDir = `${__dirname}/logs`;
@@ -68,7 +7,7 @@ const levels = {
     warn: 1,
     info: 2,
     http: 3,
-    debug: 4,
+    debug: 4
 }
 
 const level = () => {
@@ -82,7 +21,7 @@ const colors = {
     warn: 'yellow',
     info: 'green',
     http: 'magenta',
-    debug: 'blue',
+    debug: 'blue'
 }
 
 winston.addColors(colors);
@@ -91,15 +30,18 @@ const format = winston.format.combine(
     winston.format.timestamp({ format: ' YYYY-MM-DD HH:MM:SS ||' }),
     winston.format.colorize({ all: true }),
     winston.format.printf(
-        (info) => `${info.timestamp} [ ${info.level} ] ▶ ${info.message}`,
-    ),
+        (info) => `${info.timestamp} [ ${info.level} ] ▶ ${info.message}`
+    )
 )
 
-const logger = winston.createLogger({
 
+const logger = winston.createLogger({
     format,
     level: level(),
     transports: [
+        new winston.transports.Console({
+            handleExceptions: true
+        }),
         new winston.transports.DailyRotateFile({
             level: 'info',
             datePattern: 'YYYY-MM-DD',
@@ -107,7 +49,7 @@ const logger = winston.createLogger({
             filename: `%DATE%.log`,
             zippedArchive: true,	
             handleExceptions: true,
-            maxFiles: 30,  
+            maxFiles: 30
         }),
         new winston.transports.DailyRotateFile({
             level: 'error',
@@ -115,10 +57,7 @@ const logger = winston.createLogger({
             dirname: logDir + '/error',  
             filename: `%DATE%.error.log`,
             zippedArchive: true,
-            maxFiles: 30,
-        }),
-        new winston.transports.Console({
-            handleExceptions: true,
+            maxFiles: 30
         })
     ]
 });
