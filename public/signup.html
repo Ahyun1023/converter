@@ -6,11 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/common.css">
     <link rel="stylesheet" href="/public/css/signup.css">
+    <link rel="stylesheet" href="/public/css/signup.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/public/js/signup.js" type="text/javascript"></script>
     <title>CONVERTER</title>
 </head>
 <body>
-    
+    <div class="mainDiv">
+        <div class="signupDiv">
+            <div class="inputDiv">
+                <div class="idDiv">
+                    <div class="titleDiv">ID</div>
+                    <input type="text" id="id" class="id">
+                </div>
+                <div class="pwDiv">
+                    <div class="titleDiv">비밀번호</div>
+                    <input type="text" id="password" class="password">
+                </div>
+                <div class="checkpPwDiv">
+                    <div class="titleDiv">비밀번호 확인</div>
+                    <input type="text" id="checkPassword" class="checkPassword">
+                </div>
+                <div class="nameDiv">
+                    <div class="titleDiv">이름</div>
+                    <input type="text" id="name" class="name">
+                </div>
+                <div class="birthDiv">
+                    <div class="titleDiv">생년월일</div>
+                    <input type="date" id="birthYear" class="birth">
+                    <!-- 캘린더 쓸거임 -->
+                </div>
+                <div class="emailDiv">
+                    <div class="titleDiv">이메일</div>
+                    <input type="text" id="email" class="email">
+                </div>
+                <div class="btnDiv">
+                    <button onclick="doSignup()">회원가입</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
