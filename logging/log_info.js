@@ -27,11 +27,9 @@ const colors = {
 winston.addColors(colors);
 
 const format = winston.format.combine(
-    winston.format.timestamp({ format: ' YYYY-MM-DD HH:MM:SS ||' }),
-    winston.format.colorize({ all: true }),
-    winston.format.printf(
-        (info) => `${info.timestamp} [ ${info.level} ] ▶ ${info.message}`
-    )
+    winston.format.timestamp({ format: ' YYYY-MM-DD HH:MM:SS ||'}),
+    winston.format.colorize({all: true}),
+    winston.format.printf((info) => `${info.timestamp} [${info.level}] > ${info.message}`)
 )
 
 
@@ -49,15 +47,15 @@ const logger = winston.createLogger({
             filename: `%DATE%.log`,
             zippedArchive: true,	
             handleExceptions: true,
-            maxFiles: 30
+            maxFiles: 500
         }),
         new winston.transports.DailyRotateFile({
             level: 'error',
             datePattern: 'YYYY-MM-DD',
             dirname: logDir + '/error',  
-            filename: `%DATE%.error.log`,
+            filename: `%DATE%_error.log`,
             zippedArchive: true,
-            maxFiles: 30
+            maxFiles: 500
         })
     ]
 });
