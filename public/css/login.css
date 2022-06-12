@@ -5,7 +5,7 @@
     width: 60%;
     background-color: white;
     text-align: center;
-    box-shadow: 3px 3px 10px;
+    box-shadow: 3px 3px 0.5rem;
 }
 
 .loginDiv input{

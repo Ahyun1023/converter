@@ -1,0 +1,32 @@
+.signupDiv{
+    border-radius: 1rem;
+    padding: 10rem 15rem 10rem 15rem;
+    margin: 3% 0% 0% 5%;
+    width: 65%;
+    text-align: center;
+    background-color: white;
+    box-shadow: 3px 3px 0.5em;
+}
+
+.inputDiv{ /*임시*/
+    border: 1px solid black;
+}
+
+.signupDiv input{
+    width: 25%;
+}
+
+.btnDiv button{
+    width: 15%;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    background-color: #7FC8A9;
+}
+
+.signupDiv input, .signupDiv button{
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 30px;
+    margin: 10px;
+}
