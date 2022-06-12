@@ -23,6 +23,8 @@ app.use(express.json());
 router = express.Router();
 
 router.route('/doLogin').post(user_rountes.doLogin);
+router.route('/checkOverlapId').post(user_rountes.checkOverlapId);
+router.route('/doSignup').post(user_rountes.doSignup);
 
 app.use('/', router);
 
@@ -36,9 +38,7 @@ app.use('/', router);
 app.use(errorHandler);*/
 
 http.createServer(app).listen(app.get('port'), ()=>{
-    console.log('서버 시작, 포트넘버: %d', app.get('port'));
-    
-    logger.info('로그 출력 test');
+    logger.info('서버 시작, 포트넘버: ' + app.get('port'));
 })
 
 //url : http://localhost:8090/public/
