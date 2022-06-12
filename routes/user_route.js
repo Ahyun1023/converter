@@ -23,8 +23,18 @@ const doLogin = (req, res)=>{
     });
 };
 
+const checkOverlapId = (req, res) => {
+    let idInfo = req.body.id;
+
+    idInfo = JSON.parse();
+}
+
 const doSignup = (req, res)=>{
-    
+    let userInfo = req.body.user_data;
+
+    userInfo = JSON.parse(userInfo);
 }
 
 module.exports.doLogin = doLogin;
+module.exports.checkOverlapId = checkOverlapId;
+module.exports.doSignup = doSignup;
