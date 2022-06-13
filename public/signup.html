@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/common.css">
     <link rel="stylesheet" href="/public/css/signup.css">
-    <link rel="stylesheet" href="/public/css/signup.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/public/js/signup.js" type="text/javascript"></script>
     <title>CONVERTER</title>
@@ -21,11 +20,14 @@
                 </div>
                 <div class="pwDiv">
                     <div class="titleDiv">비밀번호</div>
-                    <input type="text" id="password" class="password">
+                    <input type="password" id="password" class="password">
+                    <div id="pwCondition">~~~~~~~~비밀번호 조건~~~~~~~</div>
                 </div>
                 <div class="checkpPwDiv">
                     <div class="titleDiv">비밀번호 확인</div>
-                    <input type="text" id="checkPassword" class="checkPassword">
+                    <input type="password" id="checkPassword" class="checkPassword" onkeyup="checkOverlapId()">
+                    <div id="pwWrong">비밀번호가 일치하지 않습니다.</div>
+                    <div id="pwCorrect">비밀번호가 일치합니다.</div>
                 </div>
                 <div class="nameDiv">
                     <div class="titleDiv">이름</div>
@@ -34,7 +36,6 @@
                 <div class="birthDiv">
                     <div class="titleDiv">생년월일</div>
                     <input type="date" id="birthYear" class="birth">
-                    <!-- 캘린더 쓸거임 -->
                 </div>
                 <div class="emailDiv">
                     <div class="titleDiv">이메일</div>

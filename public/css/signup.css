@@ -1,4 +1,4 @@
-.signupDiv{
+/*.signupDiv{
     border-radius: 1rem;
     padding: 10rem 15rem 10rem 15rem;
     margin: 3% 0% 0% 5%;
@@ -6,14 +6,17 @@
     text-align: center;
     background-color: white;
     box-shadow: 3px 3px 0.5em;
-}
+}*/
 
-.inputDiv{ /*임시*/
-    border: 1px solid black;
+.inputDiv{
+    border: 1px solid black; /*임시*/
+    padding: 5rem 10rem 5rem 10rem;
+    margin: 5rem;
+    /*text-align: center;*/
 }
 
 .signupDiv input{
-    width: 25%;
+    width: 20rem;
 }
 
 .btnDiv button{
@@ -29,4 +32,27 @@
     border-radius: 5px;
     height: 30px;
     margin: 10px;
+}
+
+.idDiv, .pwDiv, .checkpPwDiv, .nameDiv, .birthDiv, .emailDiv, .btnDiv{
+    border: 1px solid blue; /*임시*/
+    margin: 1rem 25rem 1rem 25rem;
+    text-align: center;
+}
+
+.titleDiv{
+    border: 1px solid green;
+}
+
+#pwCondition, #pwWrong, #pwCorrect{
+    font-size: small;
+    display: none;
+}
+
+#pwCondition, #pwWrong{
+    color: red;
+}
+
+#pwCorrect{
+    color: green;
 }

@@ -12,7 +12,7 @@ const doLogin = (req, res)=>{
 
     connection.query('SELECT * FROM USER_TB WHERE ID = ? AND PW = ?;', [loginInfo.id, loginInfo.password], (err, results)=>{
         if(err){
-            console.log(err);
+            logger.error(err);
         } else{
             if(results == 0){
                 res.send({result: false});
