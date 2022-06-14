@@ -16,7 +16,6 @@ app.set('port', process.env.PORT || 8090);
 app.set('view engine', 'pug');
 app.set('views, views');
 //app.engine('html', require('pug'));
-app.engine('html', require('pug').renderFile);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
