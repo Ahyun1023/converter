@@ -1,0 +1,36 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet', href='../css/common.css')
+  link(rel='stylesheet', href='../css/signup.css')
+  script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+  script(src='../js/signup.js', type='text/javascript')
+  title CONVERTER
+.mainDiv
+  .signupDiv
+    .inputDiv
+      .idDiv
+        .titleDiv ID
+        input#id.id(type='text')
+      .pwDiv
+        .titleDiv 비밀번호
+        input#password.password(type='password')
+        #pwCondition ~~~~~~~~비밀번호 조건~~~~~~~
+      .checkpPwDiv
+        .titleDiv 비밀번호 확인
+        input#checkPassword.checkPassword(type='password', onkeyup='checkOverlapId()')
+        #pwWrong 비밀번호가 일치하지 않습니다.
+        #pwCorrect 비밀번호가 일치합니다.
+      .nameDiv
+        .titleDiv 이름
+        input#name.name(type='text')
+      .birthDiv
+        .titleDiv 생년월일
+        input#birthYear.birth(type='date')
+      .emailDiv
+        .titleDiv 이메일
+        input#email.email(type='text')
+      .btnDiv
+        button(onclick='doSignup()') 회원가입
