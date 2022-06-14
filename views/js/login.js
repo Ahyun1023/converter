@@ -1,12 +1,4 @@
-function loginButtonClick(){
-    $('.mainDiv').fadeOut('slow', function(){
-        $(".mainDiv").load("login.html", function(){
-            $(".mainDiv").fadeIn('slow');
-        });
-    });    
-}
-
-function doLogin(){
+function login(){
     let login_data = {
         id: document.getElementById("id").value,
         password: document.getElementById("password").value
@@ -26,13 +18,13 @@ function doLogin(){
 
     $(document).ready(()=>{
         $.ajax({
-            url: '/doLogin',
+            url: '/users/login',
             type: 'POST',
             dataType: 'json',
             data: {login_data: login_data},
             success: (result)=>{
                 if(result.result == true){
-                    location.href = '/public/index.html';
+                    location.href = '/';
                 } else{
                     alert('아이디 혹은 비밀번호가 틀렸습니다.');
                 }
