@@ -1,13 +1,10 @@
-head
-  meta(charset='UTF-8')
-  meta(http-equiv='X-UA-Compatible', content='IE=edge')
-  meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  link(rel='stylesheet', href='../css/common.css')
-  link(rel='stylesheet', href='../css/convert/uniConvert.css')
-  script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-  script(src='../js/common.js', type='text/javascript')
+doctype html
+html
+  include include/option.pug
   script(src='../js/convert/uniConvert.js', type='text/javascript')
-  title CONVERTER
+  link(rel='stylesheet', href='../css/convert/uniConvert.css')
+
+  include include/header.pug
 .optionDiv
   form(name='convertForm', onclick='typeChange()')
     input#unicode(type='radio', name='convertType', value='unicode', checked='checked')
