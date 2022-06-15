@@ -29,16 +29,6 @@ body{
 .top { top: 0; }
 .bottom { bottom: 0; }*/
 
-.topDiv{
-    margin-top: 2%;
-    margin-left: 95%;
-}
-
-.login{
-    text-decoration: none;
-    color: black;
-}
-
 .title{
     text-align: center;
     font-size: 80px;

@@ -2,7 +2,7 @@ let opacity = 0;
 let intervalID = 0;
 	 
 
-function caseConvert(){
+/*function caseConvert(){
     $('.mainDiv').fadeOut('slow', function(){
         $(".mainDiv").load("caseConvert.html", function(){
             $(".mainDiv").fadeIn('slow');
@@ -24,4 +24,4 @@ function queryConvert(){
             $(".mainDiv").fadeIn('slow');
         });
     });
-}
+}*/

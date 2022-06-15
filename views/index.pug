@@ -1,19 +1,13 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(http-equiv='X-UA-Compatible', content='IE=edge')
-  meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-  link(rel='stylesheet', href='../css/common.css')
-  link(rel='stylesheet', href='../css/index.css')
-  script(src='../js/common.js', type='text/javascript')
+html
+  include include/option.pug
   script(src='../js/index.js', type='text/javascript')
-  title CONVERTER
-.topDiv
-  a.login(href='./users/login') 로그인
+  link(rel='stylesheet', href='../css/index.css')
+
+  include include/header.pug
 .mainDiv
   h1.title CONVERTER
   .choiceDiv
-    .caseConvert(onclick='caseConvert()')
-    .uniConvert(onclick='uniConvert()')
-    .queryConvert(onclick='queryConvert()')
+    a.caseConvert(href='/caseConvert')
+    a.uniConvert(href='/uniConvert')
+    a.queryConvert(href='/queryConvert')
