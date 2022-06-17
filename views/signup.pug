@@ -14,13 +14,14 @@ head
       .idDiv
         .titleDiv ID
         input#id.id(type='text')
+        button#checkId.checkId(onclick='checkOverlapId()') 중복확인
       .pwDiv
         .titleDiv 비밀번호
-        input#password.password(type='password')
+        input#password.password(type='password', onkeyup='checkPassword()')
         #pwCondition ~~~~~~~~비밀번호 조건~~~~~~~
       .checkpPwDiv
         .titleDiv 비밀번호 확인
-        input#checkPassword.checkPassword(type='password', onkeyup='checkOverlapId()')
+        input#checkPassword.checkPassword(type='password', onkeyup='checkPassword()')
         #pwWrong 비밀번호가 일치하지 않습니다.
         #pwCorrect 비밀번호가 일치합니다.
       .nameDiv
