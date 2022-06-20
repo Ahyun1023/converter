@@ -37,12 +37,20 @@ router.get('/signup', function(req, res){
 });
 
 /* 아이디 중복 체크 */
-router.post('/checkOverlapId', function(req, res){
-    let idInfo = req.body.id_data;
+router.get('/checkOverlapId', function(req, res){
+    let idInfo = req.body.id;
 
-    logger.debug(idInfo);
-
-    idInfo = JSON.parse(idInfo);
+    connection.query('SELECT ID FROM USER_TB WHERE ID = ?;', [idInfo], (err, results)=>{
+        if(err){
+            logger.error(err);
+        } else{
+            if(results == 0){
+                res.send({result: false});
+            } else{
+                res.send({result: true});
+            }
+        }
+    });
 });
 
 

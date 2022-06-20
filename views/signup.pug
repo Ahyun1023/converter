@@ -15,6 +15,8 @@ head
         .titleDiv ID
         input#id.id(type='text')
         button#checkId.checkId(onclick='checkOverlapId()') 중복확인
+        #idWrong 사용할 수 없는 아이디 입니다.
+        #idCorrect 사용가능한 아이디입니다.
       .pwDiv
         .titleDiv 비밀번호
         input#password.password(type='password', onkeyup='checkPassword()')
