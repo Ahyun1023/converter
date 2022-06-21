@@ -4,10 +4,6 @@ function checkOverlapId(){
     
     httpReq = new XMLHttpRequest();
 
-    httpReq.open('GET', '/users/checkOverlapId?id=', id);
-    httpReq.responseType = 'json';
-    httpReq.send();
-
     httpReq.onreadystatechange = () =>{
         if(httpReq.readState === XMLHttpRequest.DONE){
             if(httpReq.status === 200){
@@ -27,6 +23,10 @@ function checkOverlapId(){
             }
         }
     }
+
+    httpReq.open('GET', '/users/checkOverlapId?id=', id);
+    httpReq.responseType = 'json';
+    httpReq.send();
 }
 
 function checkPassword(){

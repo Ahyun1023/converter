@@ -40,6 +40,10 @@
     text-align: center;
 }
 
+#idWrong, #idCorrect{
+    display: none;
+}
+
 .titleDiv{
     border: 1px solid green;
 }
