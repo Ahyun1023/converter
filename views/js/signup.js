@@ -1,31 +1,27 @@
 function checkOverlapId(){
-    let httpReq;
+    let httpReq = new XMLHttpRequest();
     let id = document.getElementById('id').value;
     
-    httpReq = new XMLHttpRequest();
-
     httpReq.onreadystatechange = () =>{
-        if(httpReq.readState === XMLHttpRequest.DONE){
+        if(httpReq.readyState === XMLHttpRequest.DONE){
             if(httpReq.status === 200){
-                alert('ok');
-                var isOverlap = httpReq.response;
-                if(isOverlap == false){
+                var isOverlap = JSON.parse(httpReq.response);
+                if(isOverlap == true){
                     document.getElementById('idCorrect').style.display = 'block';
                     document.getElementById('idWrong').style.display = 'none';
                 } else {
-                    document.getElementById('idWrong').style.display = 'block';
                     document.getElementById('idCorrect').style.display = 'none';
+                    document.getElementById('idWrong').style.display = 'block';
                 }
             } else {
-                alert('fail');
                 document.getElementById('idWrong').style.display = 'none';
                 document.getElementById('idCorrect').style.display = 'none';
             }
         }
     }
 
-    httpReq.open('GET', '/users/checkOverlapId?id=', id);
-    httpReq.responseType = 'json';
+    httpReq.open('GET', '/users/checkOverlapId?id=' + id);
+    httpReq.setRequestHeader('Content-type', 'application/json');
     httpReq.send();
 }
 

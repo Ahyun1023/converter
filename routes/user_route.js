@@ -14,19 +14,19 @@ router.get('/login', function(req, res){
 
 /* 로그인 */
 router.post('/doLogin', function(req, res){
-    let loginInfo = req.body.login_data;
+    let id = req.body.id;
+    let password = req.body.password;
 
-    loginInfo = JSON.parse(loginInfo);
-    loginInfo.password = crypto.createHash('sha256').update(loginInfo.password).digest('hex');
+    password = crypto.createHash('sha256').update(password).digest('hex');
 
-    connection.query('SELECT * FROM USER_TB WHERE ID = ? AND PW = ?;', [loginInfo.id, loginInfo.password], (err, results)=>{
+    connection.query('SELECT * FROM USER_TB WHERE ID = ? AND PW = ?;', [id, password], (err, results)=>{
         if(err){
             logger.error(err);
         } else{
             if(results == 0){
-                res.send({result: false});
+                res.send(JSON.stringify(false));
             } else{
-                res.send({result: true});
+                res.send(JSON.stringify(true));
             }
         }
     });
@@ -38,16 +38,16 @@ router.get('/signup', function(req, res){
 
 /* 아이디 중복 체크 */
 router.get('/checkOverlapId', function(req, res){
-    let idInfo = req.body.id;
+    let idInfo = req.query.id;
 
     connection.query('SELECT ID FROM USER_TB WHERE ID = ?;', [idInfo], (err, results)=>{
         if(err){
             logger.error(err);
         } else{
-            if(results == 0){
-                res.send({result: false});
+            if(results.length > 0){
+                res.send(JSON.stringify(false));
             } else{
-                res.send({result: true});
+                res.send(JSON.stringify(true));
             }
         }
     });

@@ -14,21 +14,25 @@ function login(){
         return;
     }
 
-    login_data = JSON.stringify(login_data);
+    let httpReq = new XMLHttpRequest();
 
-    $(document).ready(()=>{
-        $.ajax({
-            url: '/users/login',
-            type: 'POST',
-            dataType: 'json',
-            data: {login_data: login_data},
-            success: (result)=>{
-                if(result.result == true){
+    httpReq.onreadystatechange = () =>{
+        if(httpReq.readyState === XMLHttpRequest.DONE){
+            if(httpReq.status === 200){
+                var result = JSON.parse(httpReq.response);
+
+                if(result == true){
                     location.href = '/';
                 } else{
                     alert('아이디 혹은 비밀번호가 틀렸습니다.');
                 }
+            } else {
+                alert('error');
             }
-        })
-    });
+        }
+    }
+
+    httpReq.open('POST', '/users/doLogin');
+    httpReq.setRequestHeader('Content-type', 'application/json');
+    httpReq.send(JSON.stringify(login_data));
 }
