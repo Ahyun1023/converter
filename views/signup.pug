@@ -5,7 +5,6 @@ head
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   link(rel='stylesheet', href='../css/common.css')
   link(rel='stylesheet', href='../css/signup.css')
-  script(src='https://code.jquery.com/jquery-3.6.0.min.js')
   script(src='../js/signup.js', type='text/javascript')
   title CONVERTER
 .mainDiv
@@ -13,8 +12,8 @@ head
     .inputDiv
       .idDiv
         .titleDiv ID
-        input#id.id(type='text')
-        button#checkId.checkId(onclick='checkOverlapId()') 중복확인
+        input#id.id(type='text', onblur='checkOverlapId()')
+        //button#checkId.checkId(onclick='checkOverlapId()') 중복확인
         #idWrong 사용할 수 없는 아이디 입니다.
         #idCorrect 사용가능한 아이디입니다.
       .pwDiv
