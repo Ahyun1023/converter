@@ -13,24 +13,22 @@ head
       .idDiv
         .titleDiv ID
         input#id.id(type='text', onblur='checkOverlapId()')
-        //button#checkId.checkId(onclick='checkOverlapId()') 중복확인
-        #idWrong 사용할 수 없는 아이디 입니다.
-        #idCorrect 사용가능한 아이디입니다.
+        #idExp
       .pwDiv
         .titleDiv 비밀번호
-        input#password.password(type='password', onkeyup='checkPassword()')
+        input#password.password(type='password', onblur='checkPassword()')
         #pwCondition ~~~~~~~~비밀번호 조건~~~~~~~
+        #pwExp
       .checkpPwDiv
         .titleDiv 비밀번호 확인
-        input#checkPassword.checkPassword(type='password', onkeyup='checkPassword()')
-        #pwWrong 비밀번호가 일치하지 않습니다.
-        #pwCorrect 비밀번호가 일치합니다.
+        input#checkPassword.checkPassword(type='password', onblur='checkPassword()')
+        #checkPwExp
       .nameDiv
         .titleDiv 이름
         input#name.name(type='text')
       .birthDiv
         .titleDiv 생년월일
-        input#birthYear.birth(type='date')
+        input#birth.birth(type='date')
       .emailDiv
         .titleDiv 이메일
         input#email.email(type='text')

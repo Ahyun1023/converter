@@ -56,7 +56,7 @@ router.get('/checkOverlapId', function(req, res){
 
 /* 회원가입 */
 router.get('/doSignup', function(req, res){
-    let userInfo = req.body.user_data;
+    let userInfo = req.body.signup_data;
 
     userInfo = JSON.parse(userInfo);
 })
