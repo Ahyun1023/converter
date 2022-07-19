@@ -31,7 +31,7 @@ function checkOverlapId(){
     }
 
     httpReq.open('GET', '/users/checkOverlapId?id=' + id);
-    httpReq.setRequestHeader('Content-type', 'application/json');
+    httpReq.responseType = "json";
     httpReq.send();
 }
 
@@ -70,18 +70,31 @@ function doSignup(){
         email: document.getElementById('email').value
     };
 
+    for(var i in signup_data.length){
+        if(signup_data[i].length <= 0){
+            alert('입력되지 않은 필수항목이 있습니다.');
+            //focus?
+            return;
+        }
+    }
+
     httpReq.onreadystatechange = () =>{
         if(httpReq.readyState === XMLHttpRequest.DONE){
             if(httpReq.status === 200){
                 //다음 실행
-                alert('^.^');
+                var success = JSON.parse(httpReq.response);
+                if(success == true){
+                    alert('회원가입이 완료되었습니다. 로그인 화면에서 로그인 해주세요.');
+                    location.href = '/users/login';
+                }
             } else {
                 //오류
             }
         }
     }
 
-    httpReq.open('POST', '/users/doSignup');
-    httpReq.setRequestHeader('Content-type', 'application/json');
+    httpReq.open('POST', '/users/doSignup', true);
+    httpReq.responseType = "json";
+    httpReq.setRequestHeader('Content-Type', 'application/json');
     httpReq.send(JSON.stringify(signup_data));
 }

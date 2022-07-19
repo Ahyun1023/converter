@@ -55,10 +55,26 @@ router.get('/checkOverlapId', function(req, res){
 
 
 /* 회원가입 */
-router.get('/doSignup', function(req, res){
-    let userInfo = req.body.signup_data;
+router.post('/doSignup', function(req, res){
+    //let userInfo = req.body.signup_data;
 
-    userInfo = JSON.parse(userInfo);
+    let userInfo = req.body;
+
+    for(var i in userInfo){
+        logger.debug(userInfo[i]);
+    }
+
+    connection.query('INSERT INTO USER_TB SET ?;', userInfo, (err, results)=>{
+        if(err){
+            logger.error(err);
+        } else{
+            if(results.length > 0){
+                res.send(JSON.stringify(true));
+            } else{
+                res.send(JSON.stringify(false));
+            }
+        }
+    });
 })
 
 module.exports = router;
