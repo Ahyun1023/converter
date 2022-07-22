@@ -27,13 +27,27 @@
     background-color: #7FC8A9;
 }
 
-.signupDiv input, .signupDiv button{
-    border: 2px solid #f0f0f0;
+.signupDiv input, .signupDiv select{
+    border: 1.5px solid #f0f0f0;
     height: 30px;
     margin: 10px;
+    background-color: #f0f0f0;
+    width: 30rem;
 }
 
-.idDiv, .pwDiv, .checkpPwDiv, .nameDiv, .birthDiv, .emailDiv, .btnDiv{
+.birthDiv input, .birthDiv select, .emailDiv input{
+    width: 9rem;
+}
+
+.emailDiv #selectEmailForm{
+    width: 8rem;
+}
+
+.emailCertDiv input{
+    width: 20rem;
+}
+
+.idDiv, .pwDiv, .checkpPwDiv, .nameDiv, .birthDiv, .emailDiv, .emailCertDiv, .btnDiv{
     border: 1px solid blue; /*임시*/
     margin: 1rem 25rem 1rem 25rem;
     text-align: center;
@@ -47,7 +61,11 @@
     border: 1px solid green;
 }
 
-#idExp, #pwExp, #checkPwExp, #pwCondition{
+#idExp, #pwExp, #checkPwExp, #pwCondition, #birthExp, #emailExp, #certEmailExp{
     font-size: small;
     display: none;
+}
+
+#birthExp, #emailExp{
+    color: red;
 }

@@ -19,7 +19,7 @@ router.post('/doLogin', function(req, res){
 
     password = crypto.createHash('sha256').update(password).digest('hex');
 
-    connection.query('SELECT * FROM USER_TB WHERE ID = ? AND PW = ?;', [id, password], (err, results)=>{
+    connection.query('SELECT * FROM USER_TB WHERE ID = ? AND PASSWORD = ?;', [id, password], (err, results)=>{
         if(err){
             logger.error(err);
         } else{
@@ -53,26 +53,22 @@ router.get('/checkOverlapId', function(req, res){
     });
 });
 
+/* 이메일 인증 */
+router.post('/emailCertificate', function(req, res){
+    res.send(JSON.stringify(true));
+});
+
 
 /* 회원가입 */
 router.post('/doSignup', function(req, res){
-    //let userInfo = req.body.signup_data;
-
     let userInfo = req.body;
-
-    for(var i in userInfo){
-        logger.debug(userInfo[i]);
-    }
+    userInfo.password = crypto.createHash('sha256').update(userInfo.password).digest('hex');
 
     connection.query('INSERT INTO USER_TB SET ?;', userInfo, (err, results)=>{
         if(err){
             logger.error(err);
         } else{
-            if(results.length > 0){
-                res.send(JSON.stringify(true));
-            } else{
-                res.send(JSON.stringify(false));
-            }
+            res.send(JSON.stringify(true));
         }
     });
 })
