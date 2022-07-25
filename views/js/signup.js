@@ -6,7 +6,7 @@ function checkOverlapId(){
 
     if(id.length <= 0){
         document.getElementById('idExp').style.display = 'block';
-        document.getElementById('idExp').innerHTML = '아이디는 필수 정보입니다.';
+        document.getElementById('idExp').innerHTML = '필수 정보입니다.';
         return;
     }
     
@@ -35,23 +35,33 @@ function checkOverlapId(){
     httpReq.send();
 }
 
-function checkPassword(){
+function checkPassword1(){
+    let pw = document.getElementById('password').value;
+
+    if(pw.length == 0){
+        document.getElementById('pwExp').style.display = 'block';
+        document.getElementById('pwExp').innerHTML = '필수 정보입니다.';
+        return;
+    }
+
+    //비밀번호 조건도 체크 추가해야함
+
+    document.getElementById('pwExp').style.display = 'none';
+}
+
+function checkPassword2(){
     let pw = document.getElementById('password').value;
     let checkPw = document.getElementById('checkPassword').value;
 
-    if(pw.length == 0 || checkPw == 0){
+    if(checkPw.length == 0){
+        document.getElementById('checkPwExp').style.display = 'block';
+        document.getElementById('checkPwExp').innerHTML = '필수 정보입니다.';
         return;
     }
-
-    if((pw.length > 0 && checkPw <= 0)){
-        document.getElementById('checkPwExp').style.display = 'none';
-        return;
-    }
-
+    
     if(pw != checkPw){
         document.getElementById('checkPwExp').style.display = 'block';
-        document.getElementById('checkPwExp').innerHTML = '비밀번호가 일치하지 않습니다.';
-        
+        document.getElementById('checkPwExp').innerHTML = '비밀번호가 일치하지 않습니다.';        
     } else {
         document.getElementById('checkPwExp').style.display = 'block';
         document.getElementById('checkPwExp').innerHTML = '비밀번호가 일치합니다.';
