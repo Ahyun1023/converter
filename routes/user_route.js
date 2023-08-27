@@ -8,9 +8,10 @@ const global = require('../global/global_variable.json');
 
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const pug = require('pug');
 
 const mailSender = {
-    sendGmail: function(param){
+    sendMail: function(param){
         let transPort = nodemailer.createTransport({
             service: 'gmail',
             host: 'smtp.gmail.com',
@@ -88,15 +89,24 @@ router.get('/checkOverlapId', function(req, res){
 
 /* 이메일 인증 */
 router.post('/emailCertificate', function(req, res){
-    let email = req.body;
+    let userEmail = req.body.email;
+    let code = crypto.randomBytes(3).toString('hex');
+
+    let emailForm;
+
+    pug.renderFile('./views/emailForm.pug',  //파일 위치 
+                 { email: userEmail, code: code}, (err, data) => { //pug mapping
+            if (err) { console.log(err) }
+            emailForm = data;
+      });
 
     let emailParam = {
-        toEmail: email,
-        subject: '이메일 인증번호를 확인해주세요',
-        text: '우히힉'
+        toEmail: userEmail,
+        subject: '[converter] 회원가입 인증메일 입니다.',
+        html: emailForm
     };
 
-    mailSender.sendGmail(emailParam);
+    mailSender.sendMail(emailParam);
     
     res.send(JSON.stringify(true));
 });
